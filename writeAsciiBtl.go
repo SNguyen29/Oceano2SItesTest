@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func (nc *Nc) WriteAsciiBTL(map_format map[string]string, hdr []string,cfg ConfigBTL) {
+func (nc *Nc) WriteAsciiBTL(map_format map[string]string, hdr []string,cfg Config) {
 	fmt.Println("Hello from WriteAscii for bottle !")
 }
 

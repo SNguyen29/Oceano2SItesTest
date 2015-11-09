@@ -2,6 +2,7 @@
 
 package main
 
+
 // read cnv files in two pass, the first to get dimensions
 // second to get data
 func (nc *Nc) ReadSeabird(files []string,optCfgfile string) {
@@ -9,10 +10,10 @@ func (nc *Nc) ReadSeabird(files []string,optCfgfile string) {
 	var Type InstrumentType
 	
 	Type = AnalyzeTypeSeabird(files)
+	var cfg Config
 	
 	switch{
 		case Type == CTD :
-			var cfg ConfigCTD
 			nc.GetConfigCTD(optCfgfile,cfg)
 			// first pass, return dimensions fron cnv files
 			nc.Dimensions["TIME"], nc.Dimensions["DEPTH"] = nc.firstPassCTD(files)
@@ -34,7 +35,6 @@ func (nc *Nc) ReadSeabird(files []string,optCfgfile string) {
 			//}
 			nc.WriteNetcdf(Type)
 		case Type == BTL :
-			var cfg ConfigBTL
 			nc.GetConfigBTL(optCfgfile,cfg)
 			// first pass, return dimensions fron btl files
 			nc.Dimensions["TIME"], nc.Dimensions["DEPTH"] = nc.firstPassBTL(files)

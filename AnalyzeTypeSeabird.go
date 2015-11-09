@@ -16,8 +16,6 @@ const (
 	BTL                = 5
 )
 
-var typeInstrument InstrumentType
-
 // define regexp
 var regIsCnv = regexp.MustCompile(`(\*END\*)`)
 var regIsBtottle = regexp.MustCompile(`^\s+(Bottle)`)

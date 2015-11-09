@@ -8,35 +8,8 @@ import (
 	"strings"
 )
 
-type ConfigCTD struct {
-	Global struct {
-		Author string
-		Debug  bool
-		Echo   bool
-	}
-	Cruise struct {
-		CycleMesure string
-		Plateforme  string
-		Callsign    string
-		Institute   string
-		Pi          string
-		Timezone    string
-		BeginDate   string
-		EndDate     string
-		Creator     string
-	}
-	Ctd struct {
-		CruisePrefix        string
-		StationPrefixLength string
-		Split               string
-		SplitAll            string
-		TypeInstrument      string
-		InstrumentNumber    string
-		TitleSummary        string
-	}
-}
 
-func (nc *Nc) GetConfigCTD(configFile string,cfg ConfigCTD) {
+func (nc *Nc) GetConfigCTD(configFile string,cfg Config) {
 
 	//	var split, header, format string
 	var split, splitAll string
@@ -62,7 +35,6 @@ func (nc *Nc) GetConfigCTD(configFile string,cfg ConfigCTD) {
 
 	err := gcfg.ReadFileInto(&cfg, configFile)
 	if err == nil {
-			//parti a modifier par rapport au type
 			split = cfg.Ctd.Split
 			splitAll = cfg.Ctd.SplitAll
 
@@ -87,8 +59,8 @@ func (nc *Nc) GetConfigCTD(configFile string,cfg ConfigCTD) {
 	}
 
 	// add specific column(s) to the first header line in ascii file
-		
-		//parti a modifier par rapport au type
+	
+		// First column should be PRFL
 		hdr = append(hdr, "PRFL")
 
 	// fill map_var from split (read in .ini configuration file)
@@ -114,4 +86,5 @@ func (nc *Nc) GetConfigCTD(configFile string,cfg ConfigCTD) {
 	for _, key := range hdr {
 		map_format[key] = nc.Roscop[key].format
 	}
+	//return nc
 }

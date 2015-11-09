@@ -13,7 +13,7 @@ const (
 	codeForProfile = -1
 )
 
-func (nc *Nc) WriteAsciiCTD(map_format map[string]string, hdr []string, cfg ConfigCTD) {
+func (nc *Nc) WriteAsciiCTD(map_format map[string]string, hdr []string, cfg Config) {
 	// define 2 files, profiles header and data
 	var asciiFilename string
 

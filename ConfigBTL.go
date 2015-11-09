@@ -8,35 +8,8 @@ import (
 	"strings"
 )
 
-type ConfigBTL struct {
-	Global struct {
-		Author string
-		Debug  bool
-		Echo   bool
-	}
-	Cruise struct {
-		CycleMesure string
-		Plateforme  string
-		Callsign    string
-		Institute   string
-		Pi          string
-		Timezone    string
-		BeginDate   string
-		EndDate     string
-		Creator     string
-	}
-	Btl struct {
-		CruisePrefix        string
-		StationPrefixLength string
-		Split               string
-		TypeInstrument      string
-		InstrumentNumber    string
-		TitleSummary        string
-		Comment             string
-	}
-}
 
-func (nc *Nc) GetConfigBTL(configFile string,cfg ConfigBTL) {
+func (nc *Nc) GetConfigBTL(configFile string,cfg Config) {
 
 	//	var split, header, format string
 	var split, splitAll string
@@ -62,7 +35,7 @@ func (nc *Nc) GetConfigBTL(configFile string,cfg ConfigBTL) {
 
 	err := gcfg.ReadFileInto(&cfg, configFile)
 	if err == nil {
-			//parti a modifier par rapport au type
+
 			split = cfg.Btl.Split
 
 		//		cruisePrefix = cfg.Ctd.CruisePrefix
@@ -76,8 +49,8 @@ func (nc *Nc) GetConfigBTL(configFile string,cfg ConfigBTL) {
 		nc.Attributes["begin_date"] = cfg.Cruise.BeginDate
 		nc.Attributes["end_date"] = cfg.Cruise.EndDate
 		nc.Attributes["creator"] = cfg.Cruise.Creator
-		nc.Attributes["type_instrument"] = cfg.Btl.TypeInstrument
-		nc.Attributes["instrument_number"] = cfg.Btl.InstrumentNumber
+		nc.Attributes["type_instrument"] = cfg.Ctd.TypeInstrument
+		nc.Attributes["instrument_number"] = cfg.Ctd.InstrumentNumber
 
 	} else {
 		fmt.Println("function GetConfig error:")
@@ -87,7 +60,6 @@ func (nc *Nc) GetConfigBTL(configFile string,cfg ConfigBTL) {
 
 	// add specific column(s) to the first header line in ascii file
 
-		//parti a modifier par rapport au type
 		hdr = append(hdr, "PRFL")
 		hdr = append(hdr, "ETDD")
 
