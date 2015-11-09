@@ -1,3 +1,6 @@
+//ConfigBTL.go
+//File for config a instrument CTD
+
 package main
 
 import (

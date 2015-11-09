@@ -1,4 +1,5 @@
-// AnalyzeConstructor.go
+//AnalyzeConstructor.go
+//Analyze the constructor of the data files
 package main
 
 import (
@@ -8,7 +9,7 @@ import (
 	"regexp"
 )
 
-// define constante for instrument type
+// define constante for constructor type
 type Constructor int
 
 const (

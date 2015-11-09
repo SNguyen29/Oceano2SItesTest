@@ -1,4 +1,5 @@
 //ReadSeabird.go
+//Function for read data file for constructor Seabird
 
 package main
 

@@ -1,4 +1,6 @@
 // DecodeHeaderSeabird.go
+//Function for decode the header of a data file from Seabird constructor
+
 package main
 
 import (

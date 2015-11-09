@@ -1,4 +1,6 @@
-//File for init variable and regular expression for CTD
+//GrammCTD.go
+//File for with the regular expression for CTD type instrument and function for read CTD files
+
 package main
 
 import (

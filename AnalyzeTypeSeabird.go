@@ -1,4 +1,5 @@
 //AnalyzeTypeSeabird.go
+//Analyze the type of instrument of the data files
 package main
 
 import (

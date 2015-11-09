@@ -1,3 +1,6 @@
+//config.go
+//File with struct config who need to be change when a new type of instrument is add
+
 package main
 
 type Config struct {
@@ -35,5 +38,6 @@ type Config struct {
 		TitleSummary        string
 		Comment             string
 	}
+	//add new type of instrument
 }
 

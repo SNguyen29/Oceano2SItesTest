@@ -1,4 +1,6 @@
-//File for init variable and regular expression for BTL
+//GrammBTL.go
+//File for with the regular expression for BTL type instrument and function for read BTL files
+
 package main
 
 import (

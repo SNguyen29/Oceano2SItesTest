@@ -1,4 +1,6 @@
 // DecodeDataSeabird.go
+//Function for decode the data for Seabird constructor
+
 package main
 
 import (

@@ -1,3 +1,6 @@
+//ConfigBTL.go
+//File for config a instrument BTL 
+
 package main
 
 import (
