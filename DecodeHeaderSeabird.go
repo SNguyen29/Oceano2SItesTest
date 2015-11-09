@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"regexp"
 	"strconv"
-	"strings"
 )
 
 // define regexp
@@ -118,7 +117,7 @@ func (nc *Nc) DecodeHeaderSeabird(str string, profileTest float64) {
 			fmt.Println(value)
 			
 	// TODOS: uncomment, add optionnal value from seabird header
-		case regType.MatchString(str) :
+	/*	case regType.MatchString(str) :
 			res := regType.FindStringSubmatch(str)
 			value := strings.ToUpper(res[1]) // convert to upper case
 			var v float64
@@ -137,7 +136,7 @@ func (nc *Nc) DecodeHeaderSeabird(str string, profileTest float64) {
 			if *optDebug {
 				fmt.Println(value)
 			}
-			nc.Extras_s[fmt.Sprintf("TYPE:%d", int(profileTest))] = value
+			nc.Extras_s[fmt.Sprintf("TYPE:%d", int(profileTest))] = value*/
 		
 	}
 }
