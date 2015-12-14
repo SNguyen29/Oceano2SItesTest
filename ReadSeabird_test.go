@@ -12,6 +12,6 @@ var ncTest Nc
 ncTest.TestInitNC()
 var config Config
 TestFile, optCfgfile := GetOptions()
-ncTest.GetConfigCTD(optCfgfile,config)	
+ncTest.GetConfigCTD(optCfgfile,config,"Profile")	
 ncTest.ReadSeabird(TestFile,optCfgfile)
 }

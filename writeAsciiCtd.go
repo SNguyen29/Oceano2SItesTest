@@ -13,15 +13,15 @@ const (
 	codeForProfile = -1
 )
 
-func (nc *Nc) WriteAsciiCTD(map_format map[string]string, hdr []string, cfg Config) {
+func (nc *Nc) WriteAsciiCTD(map_format map[string]string, hdr []string, cfg Config, inst string) {
 	// define 2 files, profiles header and data
 	var asciiFilename string
 
 	// build filenames
 	str := nc.Attributes["cycle_mesure"]
 	str = strings.Replace(str, "\r", "", -1)
-	headerFilename := fmt.Sprintf("%s.ctd", strings.ToLower(str))
-	asciiFilename = fmt.Sprintf("%s%s_ctd", strings.ToLower(str), prefixAll)
+	headerFilename := fmt.Sprintf("%s."+inst, strings.ToLower(str))
+	asciiFilename = fmt.Sprintf("%s%s_"+inst, strings.ToLower(str), prefixAll)
 	//fmt.Println(headerFilename)
 	//fmt.Println(asciiFilename)
 

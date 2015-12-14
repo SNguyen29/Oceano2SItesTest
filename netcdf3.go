@@ -4,28 +4,13 @@ import (
 	"fmt"
 	"github.com/fhs/go-netcdf/netcdf"
 	"log"
-	"os"
+	//"os"
 	"strings"
 )
 
 // creates the NetCDF file following nc structure.
 //func WriteNetcdf(any interface{}) error {
-func (nc *Nc) WriteNetcdf(inst InstrumentType) {
-
-	var ncType string
-
-	switch inst {
-	case CTD:
-		ncType = "CTD"
-	case BTL:
-		ncType = "BTL"
-		//	case XBT:
-		//		ncType = "XBT"
-	default:
-		fmt.Printf("WriteNetcdf: invalide InstrumentType -> %d\n", inst)
-		fmt.Println("Exiting...")
-		os.Exit(0)
-	}
+func (nc *Nc) WriteNetcdf(ncType string) {
 
 	// build filename
 	filename := fmt.Sprintf("OS_%s%s_%s.nc",

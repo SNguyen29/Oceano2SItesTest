@@ -10,11 +10,10 @@ import (
 )
 
 // define constante for instrument type
-type InstrumentType int
-
+ 
 const (
-	CTD InstrumentType = 3
-	BTL                = 5
+	CTD string = "CTD"
+	BTL string = "BTL"
 )
 
 // define regexp
@@ -22,10 +21,10 @@ var regIsCnv = regexp.MustCompile(`(\*END\*)`)
 var regIsBtottle = regexp.MustCompile(`^\s+(Bottle)`)
 
 // read all cnv files and return dimensions
-func AnalyzeTypeSeabird(files []string) InstrumentType {
+func AnalyzeTypeSeabird(files []string) string {
 
 	// initialize result
-	var result InstrumentType = 0
+	var result string = ""
 
 	// open first file
 	fid, err := os.Open(files[0])
@@ -40,10 +39,10 @@ func AnalyzeTypeSeabird(files []string) InstrumentType {
 		
 		switch{
 		case regIsCnv.MatchString(str) :
-			result = 3
+			result = CTD
 		
 		case regIsBtottle.MatchString(str) :
-			result = 5
+			result = BTL
 		}
 	}
 	return result

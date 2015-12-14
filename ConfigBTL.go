@@ -12,7 +12,7 @@ import (
 )
 
 
-func (nc *Nc) GetConfigBTL(configFile string,cfg Config) {
+func (nc *Nc) GetConfigBTL(configFile string,cfg Config,Type string) {
 
 	//	var split, header, format string
 	var split, splitAll string
@@ -34,7 +34,7 @@ func (nc *Nc) GetConfigBTL(configFile string,cfg Config) {
 	nc.Roscop = codeRoscopFromCsv(code_roscop)
 
 	// add some global attributes for profile, change in future
-	nc.Attributes["data_type"] = "OceanSITES profile data"
+	nc.Attributes["data_type"] = Type
 
 	err := gcfg.ReadFileInto(&cfg, configFile)
 	if err == nil {

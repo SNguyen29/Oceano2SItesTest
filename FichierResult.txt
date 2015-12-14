@@ -131,17 +131,17 @@ variables:
 		NAVG:_FillValue = 1.e+036 ;
 
 // global attributes:
-		:plateforme = "ATALANTE" ;
+		:cycle_mesure = "CASSIOPEE" ;
 		:institute = "IRD" ;
 		:pi = "MARIN" ;
-		:type_instrument = "SBE911+" ;
-		:end_date = "23/08/2015" ;
-		:creator = "Jacques.Grelet@ird.fr" ;
-		:instrument_number = "09P29544-0694" ;
-		:data_type = "OceanSITES profile data" ;
-		:cycle_mesure = "CASSIOPEE" ;
 		:timezone = "GMT" ;
 		:begin_date = "19/07/2015" ;
+		:creator = "Jacques.Grelet@ird.fr" ;
+		:type_instrument = "SBE911+" ;
+		:data_type = "PROFIL" ;
+		:plateforme = "ATALANTE" ;
+		:end_date = "23/08/2015" ;
+		:instrument_number = "09P29544-0694" ;
 data:
 
  PROFILE = 101 ;
