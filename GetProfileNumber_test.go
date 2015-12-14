@@ -14,7 +14,7 @@ func TestGetProfile(t *testing.T){
 var ncTest Nc
 ncTest.TestInitNC()
 
-TestFile := "csp00101.cnv"
+TestFile := "Data/csp00101.cnv"
 Profile := ncTest.GetProfileNumber(TestFile)
 fmt.Println("Profile Number : ",Profile)
 

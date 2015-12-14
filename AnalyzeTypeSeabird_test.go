@@ -10,7 +10,7 @@ import (
 //function for testing ReadGlobal
 func  TestAnalyzeTypeSeabird(t *testing.T) {
 	
-TestFile := []string{"csp00101.cnv"}
+TestFile := []string{"Data/csp00101.cnv"}
 	
 Type := AnalyzeTypeSeabird(TestFile)
 

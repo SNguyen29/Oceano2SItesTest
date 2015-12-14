@@ -17,7 +17,7 @@ func TestDecodeData(t *testing.T){
 var ncTest Nc
 ncTest.TestInitNC()
 
-TestFile := "FileTestDecodeData.cnv"
+TestFile := "Data/FileTestDecodeData.cnv"
 
 var profileTest float64 = 00101
 

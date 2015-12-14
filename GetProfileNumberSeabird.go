@@ -14,8 +14,7 @@ var CruisePrefix string = "csp"
 func (nc *Nc) GetProfileNumber(str string) float64 {
 	var value float64
 	var err error
-
-	if strings.HasPrefix(str,CruisePrefix) {
+	if strings.Contains(str,CruisePrefix) {
 		res := strings.Split(str,CruisePrefix)
 		res = strings.Split(res[1],".")
 		if value, err = strconv.ParseFloat(res[0], 64); err == nil {
