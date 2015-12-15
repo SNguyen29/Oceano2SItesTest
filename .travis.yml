@@ -3,3 +3,7 @@ language: go
 go:
   - 1.3
   - tip
+  
+go_import_path: GOPATH/src/github.com/fhs/go-netcdf
+go_import_path: GOPATH/src/github.com/pborman/getopt
+go_import_path: GOPATH/src/code.google.com/p/gcfg
