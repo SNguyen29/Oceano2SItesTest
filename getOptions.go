@@ -29,7 +29,7 @@ func GetOptions() ([]string, string) {
 
 	// parse options line argument
 	getopt.Parse()
-
+	
 	// process bloc when option is set
 	if *optHelp {
 		getopt.Usage()

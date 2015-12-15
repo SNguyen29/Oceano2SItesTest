@@ -37,7 +37,9 @@ func (nc *Nc) ReadSeabird(files []string,optCfgfile string) {
 			//log.Fatal(err)
 			//}
 			nc.WriteNetcdf(Instrument)
+			
 		case Instrument == BTL :
+		
 			nc.GetConfigBTL(optCfgfile,cfg,Type)
 			// first pass, return dimensions fron btl files
 			nc.Dimensions["TIME"], nc.Dimensions["DEPTH"] = nc.firstPassBTL(files)
