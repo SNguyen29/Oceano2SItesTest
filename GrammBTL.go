@@ -101,13 +101,13 @@ func (ncTest *Nc) secondPassBTL(files []string) {
 		defer fid.Close()
 		// fmt.Printf("Read %s\n", file)
 
-		profile := ncTest.GetProfileNumber(file)
+		profile := nc.GetProfileNumber(file)
 		scanner := bufio.NewScanner(fid)
 		for scanner.Scan() {
 			str := scanner.Text()
 			match := regIsHeader.MatchString(str)
 			if match {
-				ncTest.DecodeHeaderSeabird(str, profile)
+				nc.DecodeHeaderSeabird(str, profile)
 			} else {
 				match = regIsMontDayYear.MatchString(str)
 				if match {
@@ -128,7 +128,7 @@ func (ncTest *Nc) secondPassBTL(files []string) {
 					//					t1 := NewTimeFromJulian(v)
 					y, _ := strconv.ParseFloat(year, 64)
 					t2 := NewTimeFromJulianDay(y, t)
-					ncTest.Variables_1D["TIME"] = append(ncTest.Variables_1D["TIME"].([]float64),
+					nc.Variables_1D["TIME"] = append(nc.Variables_1D["TIME"].([]float64),
 						t2.JulianDayOfYear())
 					//p(t2.JulianDayOfYear())
 				}

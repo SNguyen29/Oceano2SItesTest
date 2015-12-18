@@ -11,11 +11,20 @@ import (
 	"strings"
 )
 
+type btl struct {
+	CruisePrefix        string
+	StationPrefixLength string
+	Split               string
+	TypeInstrument      string
+	InstrumentNumber    string
+	TitleSummary        string
+	Comment             string
+}
 
 func (nc *Nc) GetConfigBTL(configFile string,cfg Config,Type string) {
 
 	//	var split, header, format string
-	var split, splitAll string
+	var split string
 
 	// define map from netcdf structure
 	nc.Dimensions = make(map[string]int)
@@ -69,11 +78,9 @@ func (nc *Nc) GetConfigBTL(configFile string,cfg Config,Type string) {
 	// fill map_var from split (read in .ini configuration file)
 	// store the position (column) of each physical parameter
 	var fields []string
-	if *optAll {
-		fields = strings.Split(splitAll, ",")
-	} else {
+	
 		fields = strings.Split(split, ",")
-	}
+	
 	fmt.Fprintln(debug, "getConfig: ", fields)
 
 	// construct header slice from split

@@ -30,7 +30,7 @@ type Nc struct {
 
 
 // configuration file
-var cfgname string = "oceano2oceansites.ini"
+var cfgname string = "Ini/oceano2oceansites.ini"
 var code_roscop string = "code_roscop.csv"
 
 // file prefix for --all option: "-all" for all parameters, "" empty by default

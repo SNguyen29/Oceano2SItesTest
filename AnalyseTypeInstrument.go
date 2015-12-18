@@ -3,10 +3,6 @@
 package main
 
 import (
-	//"bufio"
-	//"log"
-	//"os"
-	//"regexp"
 	"strings"
 )
 
@@ -14,8 +10,8 @@ import (
 
 const (
 	Profil string = "PROFIL"
-	TimeSeries string = "TIMESERIES"
-	Trajectoire string = "TRAJECTOIRE"
+	TimeSeries string = "TIMESERIE"
+	Trajectoire string = "TRAJECTORY"
 )
 
 var	TabProfil = [2]string{CTD,BTL}

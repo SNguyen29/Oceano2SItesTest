@@ -12,8 +12,12 @@ import (
 // define constante for instrument type
  
 const (
-	CTD string = "CTD"
-	BTL string = "BTL"
+	CTD 	string = "CTD"
+	BTL 	string = "BTL"
+	LADCP 	string = "LADCP"
+	SADCP	string = "SADCP"
+	THERMO 	string = "THERMO"
+	XBT		string = "XBT"
 )
 
 // define regexp
@@ -43,7 +47,8 @@ func AnalyzeTypeSeabird(files []string) string {
 		
 		case regIsBtottle.MatchString(str) :
 			result = BTL
-		}
+		//add case for other instrument	
+		}	
 	}
 	return result
 }

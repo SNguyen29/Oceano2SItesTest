@@ -16,6 +16,10 @@ ncTest.TestInitNC()
 
 TestFile := "Data/csp00101.cnv"
 Profile := ncTest.GetProfileNumber(TestFile)
-fmt.Println("Profile Number : ",Profile)
+fmt.Println("Profile CTD Number : ",Profile)
+
+TestFile2 := "Data/csp00101.btl"
+Profile2 := ncTest.GetProfileNumber(TestFile2)
+fmt.Println("Profile BTL Number : ",Profile2)
 
 }

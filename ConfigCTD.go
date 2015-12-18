@@ -11,6 +11,18 @@ import (
 	"strings"
 )
 
+type ctd struct {
+
+	CruisePrefix        string
+	StationPrefixLength string
+	Split               string
+	SplitAll            string
+	TypeInstrument      string
+	InstrumentNumber    string
+	TitleSummary        string
+	
+	
+}
 
 func (nc *Nc) GetConfigCTD(configFile string,cfg Config,Type string) {
 

@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/fhs/go-netcdf/netcdf"
 	"log"
-	//"os"
 	"strings"
 )
 
@@ -64,23 +63,9 @@ func (nc *Nc) WriteNetcdf(ncType string) {
 			log.Fatal(err)
 		}
 		map_1D[key] = v
-
-		// define variables attributes, get values from roscop map
-		// todos !!! for each type
-		a := v.Attr("long_name")
-		a.WriteBytes([]byte(roscop[key].long_name))
-		a = v.Attr("units")
-		a.WriteBytes([]byte(roscop[key].units))
-		a = v.Attr("valid_min")
-		a.WriteFloat64s([]float64{roscop[key].valid_min})
-		a = v.Attr("valid_max")
-		a.WriteFloat64s([]float64{roscop[key].valid_max})
-		a = v.Attr("format")
-		a.WriteBytes([]byte(roscop[key].format))
-		a = v.Attr("_FillValue")
-		a.WriteFloat64s([]float64{roscop[key]._FillValue})
-		a = v.Attr("format")
-		a.WriteBytes([]byte(roscop[key].format))
+		
+		Reflectroscop(roscop[key],v)
+		
 	}
 
 	map_2D := make(map[string]netcdf.Var)
@@ -99,23 +84,9 @@ func (nc *Nc) WriteNetcdf(ncType string) {
 			log.Fatal(err)
 		}
 		map_2D[key] = v
-
-		// define variables attributes, get values from roscop map
-		// todos !!! for each type
-		a := v.Attr("long_name")
-		a.WriteBytes([]byte(roscop[key].long_name))
-		a = v.Attr("units")
-		a.WriteBytes([]byte(roscop[key].units))
-		a = v.Attr("valid_min")
-		a.WriteFloat64s([]float64{roscop[key].valid_min})
-		a = v.Attr("valid_max")
-		a.WriteFloat64s([]float64{roscop[key].valid_max})
-		a = v.Attr("format")
-		a.WriteBytes([]byte(roscop[key].format))
-		a = v.Attr("_FillValue")
-		a.WriteFloat64s([]float64{roscop[key]._FillValue})
-		a = v.Attr("format")
-		a.WriteBytes([]byte(roscop[key].format))
+		
+		Reflectroscop(roscop[key],map_2D[key])
+	
 	}
 
 	// defines global attributes

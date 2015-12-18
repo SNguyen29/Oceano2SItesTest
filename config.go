@@ -20,24 +20,12 @@ type Config struct {
 		EndDate     string
 		Creator     string
 	}
-	Ctd struct {
-		CruisePrefix        string
-		StationPrefixLength string
-		Split               string
-		SplitAll            string
-		TypeInstrument      string
-		InstrumentNumber    string
-		TitleSummary        string
-	}
-	Btl struct {
-		CruisePrefix        string
-		StationPrefixLength string
-		Split               string
-		TypeInstrument      string
-		InstrumentNumber    string
-		TitleSummary        string
-		Comment             string
-	}
+	Ctd ctd
+	Btl btl
+	Xbt xbt
+	Thermo thermo
+	Ladcp ladcp
+	Sadcp sadcp
 	//add new type of instrument
 }
 

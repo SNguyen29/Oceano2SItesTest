@@ -16,4 +16,11 @@ Type := AnalyzeTypeSeabird(TestFile)
 
 fmt.Println("Type = ",Type)
 
+TestFile2 := []string{"Data/csp00101.btl"}
+	
+Type2 := AnalyzeTypeSeabird(TestFile2)
+
+fmt.Println("Type = ",Type2)
+
+
 }
