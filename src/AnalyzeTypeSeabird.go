@@ -22,7 +22,7 @@ const (
 
 // define regexp
 var regIsCnv = regexp.MustCompile(`(\*END\*)`)
-var regIsBtottle = regexp.MustCompile(`^\s+(Bottle)`)
+var regIsBottle = regexp.MustCompile(`^\s+(Bottle)`)
 
 // read all cnv files and return dimensions
 func AnalyzeTypeSeabird(files []string) string {
@@ -45,7 +45,7 @@ func AnalyzeTypeSeabird(files []string) string {
 		case regIsCnv.MatchString(str) :
 			result = CTD
 		
-		case regIsBtottle.MatchString(str) :
+		case regIsBottle.MatchString(str) :
 			result = BTL
 		//add case for other instrument	
 		}	

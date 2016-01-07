@@ -40,7 +40,8 @@ func (nc *Nc) GetConfigBTL(configFile string,Type string) {
 	nc.Variables_1D["LATITUDE"] = []float64{}
 	nc.Variables_1D["LONGITUDE"] = []float64{}
 	nc.Variables_1D["BATH"] = []float64{}
-	//	nc.Variables_1D["TYPECAST"] = []float64{}
+	nc.Variables_1D["TYPECAST"] = []float64{}
+	nc.Variables_1D["TYPECAST"] = append(nc.Variables_1D["TYPECAST"].([]float64))
 	nc.Roscop = codeRoscopFromCsv(code_roscop)
 
 	// add some global attributes for profile, change in future
@@ -74,7 +75,7 @@ func (nc *Nc) GetConfigBTL(configFile string,Type string) {
 	// add specific column(s) to the first header line in ascii file
 
 		hdr = append(hdr, "PRFL")
-		hdr = append(hdr, "ETDD")
+		//hdr = append(hdr, "ETDD")
 
 	// fill map_var from split (read in .ini configuration file)
 	// store the position (column) of each physical parameter

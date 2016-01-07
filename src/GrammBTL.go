@@ -69,6 +69,7 @@ func (nc *Nc) firstPassBTL(files []string) (int, int) {
 		}
 		// store the maximum pressure value
 		nc.Extras_f[fmt.Sprintf("BOTL:%d", int(profile))] = maxBottle
+		nc.Extras_s[fmt.Sprintf("TYPECAST:%s", int(profile))] = "n/a"
 		if maxBottle > maxBottleAll {
 			maxBottleAll = maxBottle
 		}
@@ -77,7 +78,7 @@ func (nc *Nc) firstPassBTL(files []string) (int, int) {
 		bottle = 0
 		line = 0
 	}
-
+	
 	fmt.Fprintf(echo, "First pass: %d files read, maximum bottle found: %4.0f db\n", len(files), maxBottle)
 	fmt.Fprintf(debug, "First pass: %d files read, maximum pressure found: %4.0f db\n", len(files), maxBottle)
 	fmt.Fprintf(debug, "First pass: size %d x %d\n", len(files), maxLine)
