@@ -24,7 +24,7 @@ type ctd struct {
 	
 }
 
-func (nc *Nc) GetConfigCTD(configFile string,cfg Config,Type string) {
+func (nc *Nc) GetConfigCTD(configFile string,Type string) {
 
 	//	var split, header, format string
 	var split, splitAll string
@@ -42,7 +42,7 @@ func (nc *Nc) GetConfigCTD(configFile string,cfg Config,Type string) {
 	nc.Variables_1D["LATITUDE"] = []float64{}
 	nc.Variables_1D["LONGITUDE"] = []float64{}
 	nc.Variables_1D["BATH"] = []float64{}
-	//	nc.Variables_1D["TYPECAST"] = []float64{}
+	nc.Variables_1D["TYPECAST"] = []float64{}
 	nc.Roscop = codeRoscopFromCsv(code_roscop)
 
 	// add some global attributes for profile, change in future
@@ -52,8 +52,7 @@ func (nc *Nc) GetConfigCTD(configFile string,cfg Config,Type string) {
 	if err == nil {
 			split = cfg.Ctd.Split
 			splitAll = cfg.Ctd.SplitAll
-
-		//		cruisePrefix = cfg.Ctd.CruisePrefix
+		
 		//		stationPrefixLength = cfg.Ctd.StationPrefixLength
 		// TODOS: complete
 		nc.Attributes["cycle_mesure"] = cfg.Cruise.CycleMesure

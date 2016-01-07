@@ -9,6 +9,7 @@ import (
 	"log"
 	"strconv"
 	"strings"
+	
 )
 
 type btl struct {
@@ -21,7 +22,7 @@ type btl struct {
 	Comment             string
 }
 
-func (nc *Nc) GetConfigBTL(configFile string,cfg Config,Type string) {
+func (nc *Nc) GetConfigBTL(configFile string,Type string) {
 
 	//	var split, header, format string
 	var split string

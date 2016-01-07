@@ -13,15 +13,15 @@ const (
 	codeForProfile = -1
 )
 
-func (nc *Nc) WriteAsciiCTD(map_format map[string]string, hdr []string, cfg Config, inst string ) {
+func (nc *Nc) WriteAsciiCTD(map_format map[string]string, hdr []string, inst string ) {
 	// define 2 files, profiles header and data
 	var asciiFilename string
 
 	// build filenames
 	str := nc.Attributes["cycle_mesure"]
 	str = strings.Replace(str, "\r", "", -1)
-	headerFilename := fmt.Sprintf("%s."+inst, strings.ToLower(str))
-	asciiFilename = fmt.Sprintf("%s%s_"+inst, strings.ToLower(str), prefixAll)
+	headerFilename := fmt.Sprintf("output/%s."+inst, strings.ToLower(str))
+	asciiFilename = fmt.Sprintf("output/%s%s_"+inst, strings.ToLower(str), prefixAll)
 	//fmt.Println(headerFilename)
 	//fmt.Println(asciiFilename)
 
@@ -110,7 +110,7 @@ func (nc *Nc) WriteAsciiCTD(map_format map[string]string, hdr []string, cfg Conf
 			DecimalPosition2String(lon[x], 0),
 			nc.Extras_f[fmt.Sprintf("DEPTH:%d", int(profile[x]))],
 			bath[x],
-			nc.Extras_s[fmt.Sprintf("TYPE:%d", int(profile[x]))],
+			nc.Extras_s[fmt.Sprintf("TYPECAST:%s", int(profile[x]))],	
 			cfg.Ctd.CruisePrefix+nc.Extras_s[fmt.Sprintf("PRFL_NAME:%d", int(profile[x]))])
 
 		// write profile information to header file

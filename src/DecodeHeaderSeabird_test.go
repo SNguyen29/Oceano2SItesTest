@@ -19,7 +19,7 @@ func (ncTest *Nc) TestInitNC(){
 	ncTest.Variables_1D["LATITUDE"] = []float64{}
 	ncTest.Variables_1D["LONGITUDE"] = []float64{}
 	ncTest.Variables_1D["BATH"] = []float64{}
-	//	nc.Variables_1D["TYPECAST"] = []float64{}
+	ncTest.Variables_1D["TYPECAST"] = []float64{}
 	ncTest.Roscop = codeRoscopFromCsv(code_roscop)
 
 	// add some global attributes for profile, change in future
@@ -36,10 +36,11 @@ var profileTest float64 = 00101
 
 //var StringTest string = "* System UpLoad Time = Jul 20 2015 06:15:13"
 //var StringTest string = "* NMEA Latitude = 19 58.55 S"
-var StringTest string = "* NMEA Longitude = 168 00.45 E"
+//var StringTest string = "* NMEA Longitude = 168 00.45 E"
 //var StringTest string = "** Cruise : CASSIOPEE"
 //var StringTest string = "** Station : 00101"
 //var StringTest string = "** Bottom Depth: 4937"
 //var StringTest string = "** Operator:  JG-GE-ESL"
+var StringTest string = "** Type: PHY"
 ncTest.DecodeHeaderSeabird(StringTest,profileTest)	
 }

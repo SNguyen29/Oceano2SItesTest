@@ -20,7 +20,7 @@ ncTest.TestInitNC()
 
 fmt.Println("Debut fichier CTD :")
 
-TestFile := "Data/FileTestDecodeData.cnv"
+TestFile := "data/FileTestDecodeData.cnv"
 
 var profileTest float64 = 00101
 
@@ -43,7 +43,7 @@ var profileTest float64 = 00101
 	}
 
 fmt.Println("Debut fichier BTL :")
-TestFile2 := "Data/FileTestDecodeData2.btl"
+TestFile2 := "data/FileTestDecodeData2.btl"
 
 var profileTest2 float64 = 00101
 

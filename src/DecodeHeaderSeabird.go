@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"regexp"
 	"strconv"
+	"strings"
 )
 
 // define regexp
@@ -31,7 +32,7 @@ var regNmeaLongitude = regexp.MustCompile(`NMEA Longitude\s*=\s*(\d+\s+\d+.\d+\s
 // to parse time with non standard format, see:
 // http://golang.org/src/time/format.go
 
-func (nc *Nc) DecodeHeaderSeabird(str string, profileTest float64) {
+func (nc *Nc) DecodeHeaderSeabird(str string, profile float64) {
 	switch {
 	// decode Systeme Upload Time
 		case regSystemTime.MatchString(str) : 
@@ -87,7 +88,7 @@ func (nc *Nc) DecodeHeaderSeabird(str string, profileTest float64) {
 				//			if p != v {
 				//				fmt.Printf("Warning: profile for header differ from file name: %s <=> %s\n", p, v)
 				//			}
-				nc.Variables_1D["PROFILE"] = append(nc.Variables_1D["PROFILE"].([]float64), profileTest)
+				nc.Variables_1D["PROFILE"] = append(nc.Variables_1D["PROFILE"].([]float64), profile)
 			} else {
 				nc.Variables_1D["PROFILE"] = append(nc.Variables_1D["PROFILE"].([]float64), 1e36)
 			}
@@ -117,9 +118,9 @@ func (nc *Nc) DecodeHeaderSeabird(str string, profileTest float64) {
 				fmt.Println(value)
 			}
 			fmt.Println(value)
-			
-	// TODOS: uncomment, add optionnal value from seabird header
-	/*	case regType.MatchString(str) :
+	
+	// TODOS: uncomment, add optionnal value from seabird header		
+		case regType.MatchString(str) :
 			res := regType.FindStringSubmatch(str)
 			value := strings.ToUpper(res[1]) // convert to upper case
 			var v float64
@@ -133,12 +134,10 @@ func (nc *Nc) DecodeHeaderSeabird(str string, profileTest float64) {
 			default:
 				v = float64(UNKNOW)
 			}
-			//f("Type: %f\n", v)
+			fmt.Println(value, v)
 			nc.Variables_1D["TYPECAST"] = append(nc.Variables_1D["TYPECAST"].([]float64), v)
-			if *optDebug {
-				fmt.Println(value)
-			}
-			nc.Extras_s[fmt.Sprintf("TYPE:%d", int(profileTest))] = value*/
-		
+
+			nc.Extras_s[fmt.Sprintf("TYPECAST:%s", int(profile))] = value
+	
 	}
 }

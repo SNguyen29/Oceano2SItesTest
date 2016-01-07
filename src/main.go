@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	
 )
 
 const PROGNAME string = "Test"
@@ -30,7 +31,7 @@ type Nc struct {
 
 
 // configuration file
-var cfgname string = "Ini/oceano2oceansites.ini"
+var cfgname string = "ini/oceano2oceansites.ini"
 var code_roscop string = "code_roscop.csv"
 
 // file prefix for --all option: "-all" for all parameters, "" empty by default
@@ -45,6 +46,7 @@ var map_var = map[string]int{}
 var map_format = map[string]string{}
 var data = make(map[string]interface{})
 var hdr []string
+var cfg Config
 
 // use for debug mode
 var debug io.Writer = ioutil.Discard
@@ -76,4 +78,5 @@ func main() {
 		case Cons == Seabird :
 			nc.ReadSeabird(files,optCfgfile)
 		}
+	
 }

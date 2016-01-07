@@ -21,7 +21,7 @@ var regIsMontDayYear = regexp.MustCompile(`^\s+\d+\s+(\w{3})\s+(\d{2})\s+(\d{4})
 var regIsHeaderBtl = regexp.MustCompile(`^[*#]|^\s+\w+`)
 
 // read .btl files and return dimensions
-func (ncTest *Nc) firstPassBTL(files []string) (int, int) {
+func (nc *Nc) firstPassBTL(files []string) (int, int) {
 
 	var line int = 0
 	var maxLine int = 0
@@ -38,7 +38,7 @@ func (ncTest *Nc) firstPassBTL(files []string) (int, int) {
 		}
 		defer fid.Close()
 
-		profile := ncTest.GetProfileNumber(file)
+		profile := nc.GetProfileNumber(file)
 		scanner := bufio.NewScanner(fid)
 		for scanner.Scan() {
 			str := scanner.Text()
@@ -68,7 +68,7 @@ func (ncTest *Nc) firstPassBTL(files []string) (int, int) {
 			maxLine = line
 		}
 		// store the maximum pressure value
-		ncTest.Extras_f[fmt.Sprintf("BOTL:%d", int(profile))] = maxBottle
+		nc.Extras_f[fmt.Sprintf("BOTL:%d", int(profile))] = maxBottle
 		if maxBottle > maxBottleAll {
 			maxBottleAll = maxBottle
 		}
@@ -85,7 +85,7 @@ func (ncTest *Nc) firstPassBTL(files []string) (int, int) {
 }
 
 // read .cnv files and extract data
-func (ncTest *Nc) secondPassBTL(files []string) {
+func (nc *Nc) secondPassBTL(files []string) {
 
 	var month, day, year string
 

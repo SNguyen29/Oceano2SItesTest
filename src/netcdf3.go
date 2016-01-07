@@ -12,7 +12,7 @@ import (
 func (nc *Nc) WriteNetcdf(ncType string) {
 
 	// build filename
-	filename := fmt.Sprintf("OS_%s%s_%s.nc",
+	filename := fmt.Sprintf("output/OS_%s%s_%s.nc",
 		strings.ToUpper(nc.Attributes["cycle_mesure"]),
 		strings.ToUpper(prefixAll),
 		ncType)
@@ -64,7 +64,8 @@ func (nc *Nc) WriteNetcdf(ncType string) {
 		}
 		map_1D[key] = v
 		
-		Reflectroscop(roscop[key],v)
+		//initialise struct roscop with netcdf variable in reflect ways without knowing the form of the roscop struct
+		Reflectroscop(roscop[key],map_1D[key])
 		
 	}
 
@@ -85,6 +86,7 @@ func (nc *Nc) WriteNetcdf(ncType string) {
 		}
 		map_2D[key] = v
 		
+		//initialise struct roscop with netcdf variable in reflect ways without knowing the form of the roscop struct
 		Reflectroscop(roscop[key],map_2D[key])
 	
 	}

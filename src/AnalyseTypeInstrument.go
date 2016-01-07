@@ -9,9 +9,9 @@ import (
 // define constante for Type
 
 const (
-	Profil string = "PROFIL"
-	TimeSeries string = "TIMESERIE"
-	Trajectoire string = "TRAJECTORY"
+	Profil string = "profile"
+	TimeSeries string = "time-series"
+	Trajectoire string = "trajectory"
 )
 
 var	TabProfil = [2]string{CTD,BTL}
