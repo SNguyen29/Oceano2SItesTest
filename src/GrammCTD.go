@@ -18,7 +18,6 @@ import (
 
 //regular expressions
 var regIsHeader = regexp.MustCompile(`^[*#]`)
-//var regEndOfHeader = regexp.MustCompile(`\*END\*`)
 
 //function
 // read .cnv files and return dimensions

@@ -1,0 +1,28 @@
+# this is a configuration file for ApplicationTest program
+
+progname  = "Test"
+progversion  = "0.1.0"
+
+configfile = "ini/oceano2oceansites.ini"
+roscopfile = "code_roscop.csv"
+
+# this is regexp for decode header in Seabird
+[Seabird]
+cnv = "END"
+bottle = "Bottle"
+prefix = "cruisePrefix"
+header1 = "*"
+header2 = "#"
+split1 = "= "
+split2 = ": "
+cruise = "Cruise"
+ship = "Ship"
+station = "Station"
+type = "Type"
+operator = "Operator"
+bottomDepth = "Bottom Depth"
+date = "Date"
+hour = "Hour"
+systemTime = "System UpLoad Time"
+latitude = "* NMEA Latitude"
+longitude = "* NMEA Longitude"

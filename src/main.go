@@ -8,7 +8,7 @@ import (
 	"log"
 	"os"
 	
-)
+) 
 
 const PROGNAME string = "Test"
 const PROGVERSION string = "0.1.0"
@@ -58,7 +58,7 @@ var nc Nc
 
 // main body
 func main() {
-
+	
 	var files []string
 	// to change the flags on the default logger
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
