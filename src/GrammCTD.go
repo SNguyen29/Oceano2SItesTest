@@ -77,7 +77,7 @@ func (nc *Nc) firstPassCTD(files []string) (int, int) {
 		// store the maximum pressure and maximum depth value per cast
 		nc.Extras_f[fmt.Sprintf("PRES:%d", int(profile))] = maxPres
 		nc.Extras_f[fmt.Sprintf("DEPTH:%d", int(profile))] = math.Floor(maxDepth)
-		
+		nc.Extras_s[fmt.Sprintf("TYPECAST:%s", int(profile))] = "n/a"
 		if maxPres > maxPresAll {
 			maxPresAll = maxPres
 		}

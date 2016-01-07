@@ -138,17 +138,17 @@ variables:
 		NAVG:_FillValue = 1.e+036 ;
 
 // global attributes:
+		:data_type = "profile" ;
 		:plateforme = "ATALANTE" ;
+		:type_instrument = "SBE911+" ;
+		:begin_date = "19/07/2015" ;
+		:end_date = "23/08/2015" ;
+		:creator = "Jacques.Grelet@ird.fr" ;
+		:instrument_number = "09P29544-0694" ;
+		:cycle_mesure = "CASSIOPEE" ;
 		:institute = "IRD" ;
 		:pi = "MARIN" ;
 		:timezone = "GMT" ;
-		:end_date = "23/08/2015" ;
-		:type_instrument = "SBE911+" ;
-		:instrument_number = "09P29544-0694" ;
-		:cycle_mesure = "CASSIOPEE" ;
-		:begin_date = "19/07/2015" ;
-		:creator = "Jacques.Grelet@ird.fr" ;
-		:data_type = "profile" ;
 data:
 
  PROFILE = 101, 102, 201 ;
@@ -161,7 +161,7 @@ data:
 
  BATH = 4937, 4780, 6127 ;
 
- TYPECAST = 1, 2, 1 ;
+ TYPECAST = -1, 1, 2 ;
 
  PRES =
   4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 

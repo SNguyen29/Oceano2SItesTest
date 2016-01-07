@@ -43,6 +43,7 @@ func (nc *Nc) GetConfigCTD(configFile string,Type string) {
 	nc.Variables_1D["LONGITUDE"] = []float64{}
 	nc.Variables_1D["BATH"] = []float64{}
 	nc.Variables_1D["TYPECAST"] = []float64{}
+	nc.Variables_1D["TYPECAST"] = append(nc.Variables_1D["TYPECAST"].([]float64), -1)
 	nc.Roscop = codeRoscopFromCsv(code_roscop)
 
 	// add some global attributes for profile, change in future

@@ -10,7 +10,7 @@ import (
 //function for testing ReadGlobal
 func  TestAnalyzeConstructor(t *testing.T) {
 
-TestFile := []string{"Data/csp00101.cnv"}
+TestFile := []string{"data/csp00101.cnv"}
 	
 Construct := AnalyzeConstructor(TestFile)
 

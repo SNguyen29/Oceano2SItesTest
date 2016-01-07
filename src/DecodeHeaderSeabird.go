@@ -119,7 +119,8 @@ func (nc *Nc) DecodeHeaderSeabird(str string, profile float64) {
 			}
 			fmt.Println(value)
 	
-	// TODOS: uncomment, add optionnal value from seabird header		
+	// TODOS: uncomment, add optionnal value from seabird header	
+			
 		case regType.MatchString(str) :
 			res := regType.FindStringSubmatch(str)
 			value := strings.ToUpper(res[1]) // convert to upper case
@@ -138,6 +139,7 @@ func (nc *Nc) DecodeHeaderSeabird(str string, profile float64) {
 			nc.Variables_1D["TYPECAST"] = append(nc.Variables_1D["TYPECAST"].([]float64), v)
 
 			nc.Extras_s[fmt.Sprintf("TYPECAST:%s", int(profile))] = value
+		 
 	
 	}
 }
