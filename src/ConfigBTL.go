@@ -4,9 +4,9 @@
 package main
 
 import (
-	"code.google.com/p/gcfg"
+	//"code.google.com/p/gcfg"
 	"fmt"
-	"log"
+	//"log"
 	"strconv"
 	//"strings"
 	
@@ -22,7 +22,7 @@ type btl struct {
 	Comment             string
 }
 
-func (nc *Nc) GetConfigBTL(configFile string,Type string) {
+func (nc *Nc) GetConfigBTL(configFile string,Type string, cfg configtoml) {
 
 	//	var split, header, format string
 	var split []string
@@ -47,8 +47,6 @@ func (nc *Nc) GetConfigBTL(configFile string,Type string) {
 	// add some global attributes for profile, change in future
 	nc.Attributes["data_type"] = Type
 
-	err := gcfg.ReadFileInto(&cfg, configFile)
-	if err == nil {
 
 			split = cfg.Btl.Split
 
@@ -66,11 +64,6 @@ func (nc *Nc) GetConfigBTL(configFile string,Type string) {
 		nc.Attributes["type_instrument"] = cfg.Ctd.TypeInstrument
 		nc.Attributes["instrument_number"] = cfg.Ctd.InstrumentNumber
 
-	} else {
-		fmt.Println("function GetConfig error:")
-		fmt.Printf("Please, check location for %s file\n", configFile)
-		log.Fatal(err)
-	}
 
 	// add specific column(s) to the first header line in ascii file
 

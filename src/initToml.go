@@ -7,7 +7,7 @@ import (
 	"github.com/BurntSushi/toml"
 )
 
-var fileconfig = "filetoml.toml"
+var fileconfig = "configtoml.toml"
 
 type configtoml struct{
 	Progname	string
@@ -82,7 +82,7 @@ type configtoml struct{
 }
 	
 
-func  initToml() {
+func  initToml(cfg configtoml) {
 	
 	if _, err := toml.DecodeFile(fileconfig, &cfg); err != nil {
 		fmt.Println(err)
