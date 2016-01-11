@@ -9,19 +9,17 @@ import (
 	"log"
 	"os"
 	"math"
-	"regexp"
 	"strconv"
+	"regexp"
 	"strings"
-
 )
 
-
-//regular expressions
-var regIsHeader = regexp.MustCompile(`^[*#]`)
 
 //function
 // read .cnv files and return dimensions
 func (nc *Nc) firstPassCTD(files []string) (int, int) {
+	
+	regIsHeader := regexp.MustCompile(cfg.Seabird.Header)
 	
 	//variable init
 	var	pres float64 = 0
@@ -95,8 +93,10 @@ func (nc *Nc) firstPassCTD(files []string) (int, int) {
 
 func (nc *Nc) secondPassCTD(files []string) {
 
-	fmt.Fprintf(echo, "Second pass ...\n")
+	regIsHeader := regexp.MustCompile(cfg.Seabird.Header)
 
+	fmt.Fprintf(echo, "Second pass ...\n")	
+	
 	// initialize profile and pressure max
 	var nbProfile int = 0
 

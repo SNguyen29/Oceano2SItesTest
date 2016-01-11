@@ -5,27 +5,10 @@ package main
 
 import (
 	"fmt"
-	"regexp"
 	"strconv"
 	"strings"
+	"regexp"
 )
-
-// define regexp
-
-var regCruise = regexp.MustCompile(`Cruise\s*:\s*(.*)`)
-var regShip = regexp.MustCompile(`Ship\s*:\s*(.*)`)
-var regStation = regexp.MustCompile(`Station\s*:\s*\D*(\d*)`)
-var regType = regexp.MustCompile(`Type\s*:\s*(.*)`)
-var regOperator = regexp.MustCompile(`Operator\s*:\s*(.*)`)
-var regBottomDepth = regexp.MustCompile(`Bottom Depth\s*:\s*(\d*\.?\d+?)\s*\S*`)
-var regDummyBottomDepth = regexp.MustCompile(`Bottom Depth\s*:\s*$`)
-var regDate = regexp.MustCompile(`Date\s*:\s*(\d+)/(\d+)/(\d+)`)
-var regHour = regexp.MustCompile(`[Heure|Hour]\s*:\s*(\d+)[:hH](\d+):(\d+)`)
-var regLatitude = regexp.MustCompile(`Latitude\s*:\s*(\d+)\s+(\d+.\d+)\s+(\w)`)
-var regLongitude = regexp.MustCompile(`Longitude\s*:\s*(\d+)\s+(\d+.\d+)\s+(\w)`)
-var regSystemTime = regexp.MustCompile(`System UpLoad Time =\s+(.*)`)
-var regNmeaLatitude = regexp.MustCompile(`NMEA Latitude\s*=\s*(\d+\s+\d+.\d+\s+\w)`)
-var regNmeaLongitude = regexp.MustCompile(`NMEA Longitude\s*=\s*(\d+\s+\d+.\d+\s+\w)`)
 
 // parse header line from .cnv and extract correct information
 // use regular expression
@@ -33,9 +16,24 @@ var regNmeaLongitude = regexp.MustCompile(`NMEA Longitude\s*=\s*(\d+\s+\d+.\d+\s
 // http://golang.org/src/time/format.go
 
 func (nc *Nc) DecodeHeaderSeabird(str string, profile float64) {
+	
+	regCruise := regexp.MustCompile(cfg.Seabird.Cruise)
+	regShip := regexp.MustCompile(cfg.Seabird.Ship)
+	regStation := regexp.MustCompile(cfg.Seabird.Station)
+	regType := regexp.MustCompile(cfg.Seabird.Type)
+	regOperator := regexp.MustCompile(cfg.Seabird.Operator)
+	regBottomDepth := regexp.MustCompile(cfg.Seabird.BottomDepth)
+	regDummyBottomDepth := regexp.MustCompile(cfg.Seabird.DummyBottomDepth)
+	//regDate := regexp.MustCompile(cfg.Seabird.Date)
+	//regHour := regexp.MustCompile(cfg.Seabird.Hour)
+	regSystemTime := regexp.MustCompile(cfg.Seabird.SystemTime)
+	regNmeaLatitude := regexp.MustCompile(cfg.Seabird.Latitude)
+	regNmeaLongitude := regexp.MustCompile(cfg.Seabird.Longitude)
+
 	switch {
-	// decode Systeme Upload Time
+	// decode Systeme Upload Time		
 		case regSystemTime.MatchString(str) : 
+			fmt.Println("Dans systeme time")
 			res := regSystemTime.FindStringSubmatch(str)
 			value := res[1]
 			fmt.Fprintf(debug, "%s -> ", value)

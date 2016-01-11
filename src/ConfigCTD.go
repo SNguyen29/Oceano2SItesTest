@@ -4,11 +4,11 @@
 package main
 
 import (
-	"code.google.com/p/gcfg"
+	//"code.google.com/p/gcfg"
 	"fmt"
-	"log"
+	//"log"
 	"strconv"
-	"strings"
+	//"strings"
 )
 
 type ctd struct {
@@ -27,7 +27,7 @@ type ctd struct {
 func (nc *Nc) GetConfigCTD(configFile string,Type string) {
 
 	//	var split, header, format string
-	var split, splitAll string
+	var split, splitAll []string
 
 	// define map from netcdf structure
 	nc.Dimensions = make(map[string]int)
@@ -44,13 +44,11 @@ func (nc *Nc) GetConfigCTD(configFile string,Type string) {
 	nc.Variables_1D["BATH"] = []float64{}
 	nc.Variables_1D["TYPECAST"] = []float64{}
 	nc.Variables_1D["TYPECAST"] = append(nc.Variables_1D["TYPECAST"].([]float64), -1)
-	nc.Roscop = codeRoscopFromCsv(code_roscop)
+	nc.Roscop = codeRoscopFromCsv(cfg.Roscopfile)
 
 	// add some global attributes for profile, change in future
 	nc.Attributes["data_type"] = Type
 
-	err := gcfg.ReadFileInto(&cfg, configFile)
-	if err == nil {
 			split = cfg.Ctd.Split
 			splitAll = cfg.Ctd.SplitAll
 		
@@ -67,11 +65,7 @@ func (nc *Nc) GetConfigCTD(configFile string,Type string) {
 		nc.Attributes["type_instrument"] = cfg.Ctd.TypeInstrument
 		nc.Attributes["instrument_number"] = cfg.Ctd.InstrumentNumber
 
-	} else {
-		fmt.Println("function GetConfig error:")
-		fmt.Printf("Please, check location for %s file\n", configFile)
-		log.Fatal(err)
-	}
+	
 
 	// add specific column(s) to the first header line in ascii file
 	
@@ -82,9 +76,9 @@ func (nc *Nc) GetConfigCTD(configFile string,Type string) {
 	// store the position (column) of each physical parameter
 	var fields []string
 	if *optAll {
-		fields = strings.Split(splitAll, ",")
+		fields = splitAll
 	} else {
-		fields = strings.Split(split, ",")
+		fields = split
 	}
 	fmt.Fprintln(debug, "getConfig: ", fields)
 

@@ -8,17 +8,6 @@ import (
 
 // define constante for Type
 
-const (
-	Profil string = "profile"
-	TimeSeries string = "time-series"
-	Trajectoire string = "trajectory"
-)
-
-var	TabProfil = [2]string{CTD,BTL}
-var	TabTimeSeries = [0]string{}
-var	TabTrajectoire = [0]string{}
-
-
 func AnalyzeTypeInstrument(inst string) string{
 	
 	var Vprofil bool = false
@@ -26,29 +15,29 @@ func AnalyzeTypeInstrument(inst string) string{
 	var Vtraj bool = false
 	var result string
 	
-	for i:=0;i<len(TabProfil);i++{
-			if strings.EqualFold(inst,TabProfil[i]){
+	for i:=0;i<len(cfg.Instrument.Tabprofil);i++{
+			if strings.EqualFold(inst,cfg.Instrument.Tabprofil[i]){
 				Vprofil = true
 			}
 				
 		}
-	for i:=0;i<len(TabTimeSeries);i++{
-			if strings.EqualFold(inst,TabTimeSeries[i]){
+	for i:=0;i<len(cfg.Instrument.Tabtimeserie);i++{
+			if strings.EqualFold(inst,cfg.Instrument.Tabtimeserie[i]){
 				VTimes = true
 			}
 				
 		}
-	for i:=0;i<len(TabTrajectoire);i++{
-			if strings.EqualFold(inst,TabTrajectoire[i]){
+	for i:=0;i<len(cfg.Instrument.Tabtrajectoire);i++{
+			if strings.EqualFold(inst,cfg.Instrument.Tabtrajectoire[i]){
 				Vtraj = true
 			}
 				
 		}
 		
 	switch{
-		case Vprofil : result = Profil
-		case VTimes : result = TimeSeries
-		case Vtraj : result = Trajectoire
+		case Vprofil : result = cfg.Profil
+		case VTimes : result = cfg.Timeserie
+		case Vtraj : result = cfg.Trajectoire
 	}
 	
 	return result

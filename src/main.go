@@ -6,12 +6,9 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
-	"os"
+	//"os"
 	
 ) 
-
-const PROGNAME string = "Test"
-const PROGVERSION string = "0.1.0"
 
 type Data_2D struct {
 	data [][]float64
@@ -29,11 +26,6 @@ type Nc struct {
 	Roscop       map[string]RoscopAttribute
 }
 
-
-// configuration file
-var cfgname string = "ini/oceano2oceansites.ini"
-var code_roscop string = "code_roscop.csv"
-
 // file prefix for --all option: "-all" for all parameters, "" empty by default
 var prefixAll = ""
 
@@ -46,7 +38,7 @@ var map_var = map[string]int{}
 var map_format = map[string]string{}
 var data = make(map[string]interface{})
 var hdr []string
-var cfg Config
+var cfg configtoml
 
 // use for debug mode
 var debug io.Writer = ioutil.Discard
@@ -59,16 +51,14 @@ var nc Nc
 // main body
 func main() {
 	
+	//init de variable cfg with config file in TOML
+	initToml()
+	
+	fmt.Fprintf(echo, "After Init")
+	
 	var files []string
 	// to change the flags on the default logger
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-
-	if os.Getenv("ApplicationTest") != "" {
-		cfgname = os.Getenv("ApplicationTest")
-	}
-	if os.Getenv("ROSCOP") != "" {
-		code_roscop = os.Getenv("ROSCOP")
-	}
 	
 	files, optCfgfile := GetOptions()
 

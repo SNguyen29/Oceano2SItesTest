@@ -88,6 +88,8 @@ func (nc *Nc) firstPassBTL(files []string) (int, int) {
 // read .cnv files and extract data
 func (nc *Nc) secondPassBTL(files []string) {
 
+	regIsHeader := regexp.MustCompile(cfg.Seabird.Header)
+	
 	var month, day, year string
 
 	fmt.Fprintf(echo, "Second pass ...\n")

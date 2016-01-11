@@ -2,9 +2,14 @@
 package main
 
 import "testing"
+import "fmt"
+import "regexp"
 
 //Function for init before the test
 func (ncTest *Nc) TestInitNC(){
+	
+	initToml()
+	fmt.Println(cfg.Roscopfile)
 	
 		// define map from netcdf structure
 	ncTest.Dimensions = make(map[string]int)
@@ -20,7 +25,7 @@ func (ncTest *Nc) TestInitNC(){
 	ncTest.Variables_1D["LONGITUDE"] = []float64{}
 	ncTest.Variables_1D["BATH"] = []float64{}
 	ncTest.Variables_1D["TYPECAST"] = []float64{}
-	ncTest.Roscop = codeRoscopFromCsv(code_roscop)
+	ncTest.Roscop = codeRoscopFromCsv(cfg.Roscopfile)
 
 	// add some global attributes for profile, change in future
 	ncTest.Attributes["data_type"] = "OceanSITES profile data"
@@ -34,13 +39,23 @@ var ncTest Nc
 ncTest.TestInitNC()
 var profileTest float64 = 00101
 
-//var StringTest string = "* System UpLoad Time = Jul 20 2015 06:15:13"
+var StringTest string = "* System UpLoad Time = Jul 20 2015 06:15:13"
 //var StringTest string = "* NMEA Latitude = 19 58.55 S"
 //var StringTest string = "* NMEA Longitude = 168 00.45 E"
 //var StringTest string = "** Cruise : CASSIOPEE"
 //var StringTest string = "** Station : 00101"
 //var StringTest string = "** Bottom Depth: 4937"
 //var StringTest string = "** Operator:  JG-GE-ESL"
-var StringTest string = "** Type: PHY"
+//var StringTest string = "** Type: PHY"
+fmt.Println(cfg.Seabird.SystemTime)
+
+temp := regexp.MustCompile(cfg.Seabird.SystemTime)
+
+if temp.MatchString(StringTest){
+	fmt.Println("same")
+	}else{
+		fmt.Println("not same")
+		}
+
 ncTest.DecodeHeaderSeabird(StringTest,profileTest)	
 }

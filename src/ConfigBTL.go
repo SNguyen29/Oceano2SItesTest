@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"log"
 	"strconv"
-	"strings"
+	//"strings"
 	
 )
 
@@ -25,7 +25,7 @@ type btl struct {
 func (nc *Nc) GetConfigBTL(configFile string,Type string) {
 
 	//	var split, header, format string
-	var split string
+	var split []string
 
 	// define map from netcdf structure
 	nc.Dimensions = make(map[string]int)
@@ -42,7 +42,7 @@ func (nc *Nc) GetConfigBTL(configFile string,Type string) {
 	nc.Variables_1D["BATH"] = []float64{}
 	nc.Variables_1D["TYPECAST"] = []float64{}
 	nc.Variables_1D["TYPECAST"] = append(nc.Variables_1D["TYPECAST"].([]float64))
-	nc.Roscop = codeRoscopFromCsv(code_roscop)
+	nc.Roscop = codeRoscopFromCsv(cfg.Roscopfile)
 
 	// add some global attributes for profile, change in future
 	nc.Attributes["data_type"] = Type
@@ -81,7 +81,7 @@ func (nc *Nc) GetConfigBTL(configFile string,Type string) {
 	// store the position (column) of each physical parameter
 	var fields []string
 	
-		fields = strings.Split(split, ",")
+		fields = split
 	
 	fmt.Fprintln(debug, "getConfig: ", fields)
 

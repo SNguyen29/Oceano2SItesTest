@@ -13,7 +13,7 @@ func (nc *Nc) ReadSeabird(files []string,optCfgfile string) {
 	Type = AnalyzeTypeInstrument(Instrument)
 	
 	switch{
-		case Instrument == CTD :
+		case Instrument == cfg.Instrument.Type[0] :
 
 			nc.GetConfigCTD(optCfgfile,Type)
 			
@@ -37,7 +37,7 @@ func (nc *Nc) ReadSeabird(files []string,optCfgfile string) {
 			//}
 			nc.WriteNetcdf(Instrument)
 			
-		case Instrument == BTL :
+		case Instrument == cfg.Instrument.Type[1] :
 		
 			nc.GetConfigBTL(optCfgfile,Type)
 			// first pass, return dimensions fron btl files

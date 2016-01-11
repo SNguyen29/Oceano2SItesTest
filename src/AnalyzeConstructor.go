@@ -6,7 +6,7 @@ import (
 	"bufio"
 	"log"
 	"os"
-	"regexp"
+	"strings"
 )
 
 // define constante for constructor type
@@ -16,8 +16,6 @@ const (
 	Seabird Constructor = 1
 )
 
-// define regexp
-var regIsSeabird = regexp.MustCompile(`^\*\s+(Sea-Bird)`)
 
 // read all cnv files and return dimensions
 func AnalyzeConstructor(files []string) Constructor {
@@ -35,7 +33,7 @@ func AnalyzeConstructor(files []string) Constructor {
 		str := scanner.Text()
 		
 		switch {
-		case regIsSeabird.MatchString(str) : 
+		case strings.ContainsAny(cfg.Instrument.Seabird,str) : 
 			result = Seabird
 		}
 	}

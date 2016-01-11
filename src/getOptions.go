@@ -23,7 +23,7 @@ func GetOptions() ([]string, string) {
 	optHelp := getopt.Bool('h', "help", "Help")
 	optAll = getopt.Bool('a', "all", "Process all parameters")
 	optVersion := getopt.BoolLong("version", 'v', "Show version, then exit.")
-	optCfgfile := getopt.StringLong("config", 'c', cfgname, "Name of the configuration file to use.")
+	optCfgfile := getopt.StringLong("config", 'c', fileconfig, "Name of the configuration file to use.")
 	//	optCycleMesure := getopt.StringLong("cycle_mesure", 'm', "", "Name of cycle_mesure")
 	optFiles := getopt.StringLong("files", 'f', "", "files to process ex: data/fr25*.cnv")
 
@@ -36,11 +36,11 @@ func GetOptions() ([]string, string) {
 		os.Exit(0)
 	}
 	if *optVersion {
-		fmt.Println(PROGNAME + ": v" + PROGVERSION)
+		fmt.Println(cfg.Progname + ": v" + cfg.Progversion)
 		fmt.Printf("Environnement variable OCEANO2OCEANSITES: %s\n", os.Getenv("OCEANO2OCEANSITES"))
 		fmt.Printf("Environnement variable ROSCOP: %s\n", os.Getenv("ROSCOP"))
-		fmt.Printf("Configuration file: %s\n", cfgname)
-		fmt.Printf("Code ROSCOP file: %s\n", code_roscop)
+		fmt.Printf("Configuration file: %s\n", fileconfig)
+		fmt.Printf("Code ROSCOP file: %s\n", cfg.Roscopfile)
 		fmt.Printf("GOPATH: %s\n", os.Getenv("GOPATH"))
 		fmt.Printf("GOBIN: %s\n", os.Getenv("GOBIN"))
 		os.Exit(0)
