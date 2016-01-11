@@ -7,15 +7,10 @@ package main
 // second to get data
 func (nc *Nc) ReadSeabird(files []string,optCfgfile string) {
 	
-	var Instrument string
-	var Type string
-	Instrument = AnalyzeTypeSeabird(files)
-	Type = AnalyzeTypeInstrument(Instrument)
-	
 	switch{
-		case Instrument == cfg.Instrument.Type[0] :
+		case filestruct.Instrument == cfg.Instrument.Type[0] :
 
-			nc.GetConfigCTD(optCfgfile,Type)
+			nc.GetConfigCTD(optCfgfile,filestruct.TypeInstrument)
 			
 			// first pass, return dimensions fron cnv files
 			nc.Dimensions["TIME"], nc.Dimensions["DEPTH"] = nc.firstPassCTD(files)
@@ -29,17 +24,17 @@ func (nc *Nc) ReadSeabird(files []string,optCfgfile string) {
 			// second pass, read files again, extract data and fill slices
 			nc.secondPassCTD(files)
 			// write ASCII file
-			nc.WriteAsciiCTD(map_format, hdr,Instrument)
+			nc.WriteAsciiCTD(map_format, hdr,filestruct.Instrument)
 		
 			// write netcdf file
 			//if err := nc.WriteNetcdf(); err != nil {
 			//log.Fatal(err)
 			//}
-			nc.WriteNetcdf(Instrument)
+			nc.WriteNetcdf(filestruct.Instrument)
 			
-		case Instrument == cfg.Instrument.Type[1] :
+		case filestruct.Instrument == cfg.Instrument.Type[1] :
 		
-			nc.GetConfigBTL(optCfgfile,Type)
+			nc.GetConfigBTL(optCfgfile,filestruct.TypeInstrument)
 			// first pass, return dimensions fron btl files
 			nc.Dimensions["TIME"], nc.Dimensions["DEPTH"] = nc.firstPassBTL(files)
 		
@@ -52,12 +47,12 @@ func (nc *Nc) ReadSeabird(files []string,optCfgfile string) {
 			// second pass, read files again, extract data and fill slices
 			nc.secondPassBTL(files)
 			// write ASCII file
-			nc.WriteAsciiBTL2(map_format, hdr,Instrument)
+			nc.WriteAsciiBTL2(map_format, hdr,filestruct.Instrument)
 		
 			// write netcdf file
 			//if err := nc.WriteNetcdf(); err != nil {
 			//log.Fatal(err)
 			//}
-			nc.WriteNetcdf(Instrument)
+			nc.WriteNetcdf(filestruct.Instrument)
 			}
 }

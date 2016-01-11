@@ -1,4 +1,5 @@
-//test toml
+//inittoml.go
+//Initialise the struct with config file
 
 package main
 
@@ -7,7 +8,7 @@ import (
 	"github.com/BurntSushi/toml"
 )
 
-var fileconfig = "configtoml.toml"
+var fileconfig = "config/configtoml.toml"
 
 type configtoml struct{
 	Progname	string
@@ -81,7 +82,7 @@ type configtoml struct{
 		}
 }
 	
-
+//init the struct configtoml with the config file
 func  initToml() {
 	
 	if _, err := toml.DecodeFile(fileconfig, &cfg); err != nil {

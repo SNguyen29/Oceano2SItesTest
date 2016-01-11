@@ -3,13 +3,6 @@ dimensions:
 	TIME = 3 ;
 	DEPTH = 4754 ;
 variables:
-	double TYPECAST(TIME) ;
-		TYPECAST:long_name = "TYPE OF CAST: UNKNOW=0, PHY=1, BIO=2, GEO=3" ;
-		TYPECAST:units = "N/A" ;
-		TYPECAST:valid_min = 0. ;
-		TYPECAST:valid_max = 9. ;
-		TYPECAST:format = "%1.0f" ;
-		TYPECAST:_FillValue = 1.e+036 ;
 	double PROFILE(TIME) ;
 		PROFILE:long_name = "PROFILE NUMBER" ;
 		PROFILE:units = "N/A" ;
@@ -45,6 +38,13 @@ variables:
 		BATH:valid_max = 11000. ;
 		BATH:format = "%6.1f" ;
 		BATH:_FillValue = 1.e+036 ;
+	double TYPECAST(TIME) ;
+		TYPECAST:long_name = "TYPE OF CAST: UNKNOW=0, PHY=1, BIO=2, GEO=3" ;
+		TYPECAST:units = "N/A" ;
+		TYPECAST:valid_min = 0. ;
+		TYPECAST:valid_max = 9. ;
+		TYPECAST:format = "%1.0f" ;
+		TYPECAST:_FillValue = 1.e+036 ;
 	double PRES(TIME, DEPTH) ;
 		PRES:long_name = "SEA PRESSURE sea surface=0" ;
 		PRES:units = "decibar=10000 pascals" ;
@@ -139,19 +139,17 @@ variables:
 
 // global attributes:
 		:data_type = "profile" ;
-		:cycle_mesure = "CASSIOPEE" ;
 		:plateforme = "ATALANTE" ;
-		:institute = "IRD" ;
-		:timezone = "GMT" ;
-		:instrument_number = "09P29544-0694" ;
-		:pi = "MARIN" ;
-		:begin_date = "19/07/2015" ;
 		:end_date = "23/08/2015" ;
+		:cycle_mesure = "CASSIOPEE" ;
+		:institute = "IRD" ;
+		:pi = "MARIN" ;
+		:timezone = "GMT" ;
+		:begin_date = "19/07/2015" ;
 		:creator = "Jacques.Grelet@ird.fr" ;
 		:type_instrument = "SBE911+" ;
+		:instrument_number = "09P29544-0694" ;
 data:
-
- TYPECAST = -1, 1, 2 ;
 
  PROFILE = 101, 102, 201 ;
 
@@ -162,6 +160,8 @@ data:
  LONGITUDE = 168.0075, 168.011, 164.581833333333 ;
 
  BATH = 4937, 4780, 6127 ;
+
+ TYPECAST = -1, 1, 2 ;
 
  PRES =
   4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 

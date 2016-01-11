@@ -39,6 +39,7 @@ var map_format = map[string]string{}
 var data = make(map[string]interface{})
 var hdr []string
 var cfg configtoml
+var filestruct structfile
 
 // use for debug mode
 var debug io.Writer = ioutil.Discard
@@ -62,10 +63,10 @@ func main() {
 	
 	files, optCfgfile := GetOptions()
 
-	Cons := AnalyzeConstructor(files)
+	filestruct = AnalyzeFile(files)
 	
 	switch{
-		case Cons == Seabird :
+		case filestruct.Constructeur == Seabird :
 			nc.ReadSeabird(files,optCfgfile)
 		}
 	
