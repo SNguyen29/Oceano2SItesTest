@@ -82,7 +82,7 @@ type configtoml struct{
 }
 	
 
-func  initToml(cfg configtoml) {
+func  initToml() {
 	
 	if _, err := toml.DecodeFile(fileconfig, &cfg); err != nil {
 		fmt.Println(err)

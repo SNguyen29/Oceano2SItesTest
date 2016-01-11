@@ -22,7 +22,7 @@ type btl struct {
 	Comment             string
 }
 
-func (nc *Nc) GetConfigBTL(configFile string,Type string, cfg configtoml) {
+func (nc *Nc) GetConfigBTL(configFile string,Type string) {
 
 	//	var split, header, format string
 	var split []string
