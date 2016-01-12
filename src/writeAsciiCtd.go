@@ -7,13 +7,14 @@ import (
 	"log"
 	"os"
 	"strings"
+	"lib"
 )
 
 const (
 	codeForProfile = -1
 )
 
-func (nc *Nc) WriteAsciiCTD(map_format map[string]string, hdr []string, inst string ) {
+func WriteAsciiCTD(nc *lib.Nc,map_format map[string]string, hdr []string, inst string ) {
 	// define 2 files, profiles header and data
 	var asciiFilename string
 
@@ -128,7 +129,7 @@ func (nc *Nc) WriteAsciiCTD(map_format map[string]string, hdr []string, inst str
 		// loop over each level
 		for y := 0; y < len_2D; y++ {
 			// goto next profile when max depth reach
-			if nc.Variables_2D["PRES"].data[x][y] >=
+			if lib.GetData(nc.Variables_2D["PRES"])[x][y] >=
 				nc.Extras_f[fmt.Sprintf("PRES:%d", int(profile[x]))] {
 				continue
 			}
@@ -138,7 +139,7 @@ func (nc *Nc) WriteAsciiCTD(map_format map[string]string, hdr []string, inst str
 				// if key not in map, goto next key
 				if _, ok := nc.Variables_2D[key]; ok {
 					// fill 2D slice
-					data := nc.Variables_2D[key].data[x][y]
+					data := lib.GetData(nc.Variables_2D[key])[x][y]
 					// print data with it's format, change format for FillValue
 					if data == 1e36 {
 						fmt.Fprintf(fbuf_ascii, "%g ", data)

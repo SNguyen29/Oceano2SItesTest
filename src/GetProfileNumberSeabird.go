@@ -7,10 +7,10 @@ import (
 	"log"
 	"strconv"
 	"strings"
-
+	"lib"
 )
 
-func (nc *Nc) GetProfileNumber(str string) float64 {
+func GetProfileNumber(nc *lib.Nc,str string) float64 {
 	var value float64
 	var err error
 	var CruisePrefix string = cfg.Ctd.CruisePrefix

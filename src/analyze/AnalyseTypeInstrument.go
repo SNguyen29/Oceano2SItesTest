@@ -1,14 +1,15 @@
 //AnalyzeTypeInstrument.go
 //Analyze the type of instrument in general case
-package main
+package analyze
 
 import (
 	"strings"
+	"toml"
 )
 
 // define constante for Type
 
-func AnalyzeTypeInstrument(inst string) string{
+func AnalyzeTypeInstrument(cfg toml.Configtoml,inst string) string{
 	
 	var Vprofil bool = false
 	var VTimes bool = false

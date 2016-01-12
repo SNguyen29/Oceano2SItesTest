@@ -1,5 +1,5 @@
 //AnalyzeType_test.go
-package main
+package analyze
 
 import "testing"
 

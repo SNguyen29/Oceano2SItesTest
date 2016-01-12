@@ -1,7 +1,7 @@
-//ConfigXBT.go
-//File for config a instrument XBT
+//ConfigLADCP.go
+//File for config a instrument LADCP
 
-package main
+package config
 
 import (
 	//"code.google.com/p/gcfg"
@@ -9,9 +9,10 @@ import (
 	//"log"
 	//"strconv"
 	//"strings"
+	"lib"
 )
 
-type xbt struct {
+type ladcp struct {
 
 	CruisePrefix        string
 	StationPrefixLength string
@@ -22,6 +23,6 @@ type xbt struct {
 	
 }
 
-func (nc *Nc) GetConfigXBT(configFile string,cfg Config,Type string) {
+func GetConfigLADCP(nc *lib.Nc,m *Map,configFile string,cfg Config,Type string) {
 
 }

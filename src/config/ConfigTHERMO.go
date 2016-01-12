@@ -1,7 +1,7 @@
-//ConfigLADCP.go
-//File for config a instrument LADCP
+//ConfigTHERMO.go
+//File for config a instrument THERMO
 
-package main
+package config
 
 import (
 	//"code.google.com/p/gcfg"
@@ -9,9 +9,10 @@ import (
 	//"log"
 	//"strconv"
 	//"strings"
+	"lib"
 )
 
-type ladcp struct {
+type thermo struct {
 
 	CruisePrefix        string
 	StationPrefixLength string
@@ -19,9 +20,8 @@ type ladcp struct {
 	InstrumentNumber    string
 	TitleSummary        string
 	
-	
 }
 
-func (nc *Nc) GetConfigLADCP(configFile string,cfg Config,Type string) {
+func GetConfigTHERMO(nc *lib.Nc,m *Map,configFile string,cfg Config,Type string) {
 
 }

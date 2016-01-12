@@ -12,12 +12,14 @@ import (
 	"strconv"
 	"regexp"
 	"strings"
+	"config"
+	"lib"
 )
 
 
 //function
 // read .cnv files and return dimensions
-func (nc *Nc) firstPassCTD(files []string) (int, int) {
+func firstPassCTD(nc *lib.Nc,files []string) (int, int) {
 	
 	regIsHeader := regexp.MustCompile(cfg.Seabird.Header)
 	
@@ -39,7 +41,7 @@ func (nc *Nc) firstPassCTD(files []string) (int, int) {
 		}
 		defer fid.Close()
 
-		profile := nc.GetProfileNumber(file)
+		profile := GetProfileNumber(nc,file)
 		scanner := bufio.NewScanner(fid)
 		for scanner.Scan() {
 			str := scanner.Text()
@@ -47,11 +49,11 @@ func (nc *Nc) firstPassCTD(files []string) (int, int) {
 			if !match {
 				values := strings.Fields(str)
 				// read the pressure
-				if pres, err = strconv.ParseFloat(values[map_var["PRES"]], 64); err != nil {
+				if pres, err = strconv.ParseFloat(values[m.Map_var["PRES"]], 64); err != nil {
 					log.Fatal(err)
 				}
 				// read the depth
-				if depth, err = strconv.ParseFloat(values[map_var["DEPTH"]], 64); err != nil {
+				if depth, err = strconv.ParseFloat(values[m.Map_var["DEPTH"]], 64); err != nil {
 					log.Fatal(err)
 				} else {
 					//p(math.Floor(depth))
@@ -91,7 +93,7 @@ func (nc *Nc) firstPassCTD(files []string) (int, int) {
 	return len(files), maxLine
 }
 
-func (nc *Nc) secondPassCTD(files []string) {
+func secondPassCTD(nc *lib.Nc,files []string) {
 
 	regIsHeader := regexp.MustCompile(cfg.Seabird.Header)
 
@@ -111,33 +113,33 @@ func (nc *Nc) secondPassCTD(files []string) {
 		defer fid.Close()
 		// fmt.Printf("Read %s\n", file)
 
-		profile := nc.GetProfileNumber(file)
+		profile := GetProfileNumber(nc,file)
 		scanner := bufio.NewScanner(fid)
 		downcast := true
 		for scanner.Scan() {
 			str := scanner.Text()
 			match := regIsHeader.MatchString(str)
 			if match {
-				nc.DecodeHeaderSeabird(str, profile)
+				DecodeHeaderSeabird(nc,str, profile)
 			} else {
 				// fill map data with information contain in read line str
-				nc.DecodeDataSeabird(str, profile, file, line)
+				DecodeDataSeabird(nc,&m,str, profile, file, line)
 
 				if downcast {
 					// fill 2D slice
-					for _, key := range hdr {
+					for _, key := range m.Hdr {
 						if key != "PRFL" {
 							//fmt.Println("Line: ", line, "key: ", key, " data: ", data[key])
-							nc.Variables_2D[key].data[nbProfile][line] = data[key].(float64)
+							lib.SetData(nc.Variables_2D[key],nbProfile,line,config.GetData(m.Data[key]))
 						}
 					}
 					// exit loop if reach maximum pressure for the profile
-					if data["PRES"] == nc.Extras_f[fmt.Sprintf("PRES:%d", int(profile))] {
+					if m.Data["PRES"] == nc.Extras_f[fmt.Sprintf("PRES:%d", int(profile))] {
 						downcast = false
 					}
 				} else {
 					// store last julian day for end profile
-					nc.Extras_f[fmt.Sprintf("ETDD:%d", int(profile))] = data["ETDD"].(float64)
+					nc.Extras_f[fmt.Sprintf("ETDD:%d", int(profile))] = m.Data["ETDD"].(float64)
 					//fmt.Println(presMax)
 				}
 				line++
@@ -151,7 +153,7 @@ func (nc *Nc) secondPassCTD(files []string) {
 		nbProfile += 1
 
 		// store last julian day for end profile
-		nc.Extras_f[fmt.Sprintf("ETDD:%d", int(profile))] = data["ETDD"].(float64)
+		nc.Extras_f[fmt.Sprintf("ETDD:%d", int(profile))] = m.Data["ETDD"].(float64)
 		//fmt.Println(presMax)
 	}
 	fmt.Fprintln(debug, nc.Variables_1D["PROFILE"])

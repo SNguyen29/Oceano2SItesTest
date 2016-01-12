@@ -1,16 +1,16 @@
 //inittoml.go
 //Initialise the struct with config file
 
-package main
+package toml
 
 import (
 	"fmt"
 	"github.com/BurntSushi/toml"
 )
 
-var fileconfig = "config/configtoml.toml"
+var fileconfig = "configfile/configtoml.toml"
 
-type configtoml struct{
+type Configtoml struct{
 	Progname	string
 	Progversion	string
 	Roscopfile 	string
@@ -83,11 +83,13 @@ type configtoml struct{
 }
 	
 //init the struct configtoml with the config file
-func  initToml() {
+func  InitToml() (string,Configtoml){
+	
+	var cfg Configtoml
 	
 	if _, err := toml.DecodeFile(fileconfig, &cfg); err != nil {
 		fmt.Println(err)
-		return
+		return fileconfig,cfg
 	}
-	
+	return fileconfig,cfg
 }

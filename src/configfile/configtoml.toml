@@ -3,7 +3,7 @@
 progname  	= "Test"
 progversion = "0.1.0"
 
-roscopfile = "code_roscop.csv"
+roscopfile = "roscop/code_roscop.csv"
 
 profil 		= "profile"
 timeserie 	= "time-series"

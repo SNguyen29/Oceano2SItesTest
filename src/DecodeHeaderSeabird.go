@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"strings"
 	"regexp"
+	"lib"
 )
 
 // parse header line from .cnv and extract correct information
@@ -15,7 +16,7 @@ import (
 // to parse time with non standard format, see:
 // http://golang.org/src/time/format.go
 
-func (nc *Nc) DecodeHeaderSeabird(str string, profile float64) {
+func  DecodeHeaderSeabird(nc *lib.Nc,str string, profile float64) {
 	
 	regCruise := regexp.MustCompile(cfg.Seabird.Cruise)
 	regShip := regexp.MustCompile(cfg.Seabird.Ship)

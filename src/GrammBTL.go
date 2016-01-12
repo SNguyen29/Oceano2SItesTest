@@ -11,6 +11,8 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"lib"
+	"config"
 )
 
 
@@ -21,7 +23,7 @@ var regIsMontDayYear = regexp.MustCompile(`^\s+\d+\s+(\w{3})\s+(\d{2})\s+(\d{4})
 var regIsHeaderBtl = regexp.MustCompile(`^[*#]|^\s+\w+`)
 
 // read .btl files and return dimensions
-func (nc *Nc) firstPassBTL(files []string) (int, int) {
+func firstPassBTL(nc *lib.Nc,m *config.Map,files []string) (int, int) {
 
 	var line int = 0
 	var maxLine int = 0
@@ -38,7 +40,7 @@ func (nc *Nc) firstPassBTL(files []string) (int, int) {
 		}
 		defer fid.Close()
 
-		profile := nc.GetProfileNumber(file)
+		profile := GetProfileNumber(nc,file)
 		scanner := bufio.NewScanner(fid)
 		for scanner.Scan() {
 			str := scanner.Text()
@@ -46,9 +48,9 @@ func (nc *Nc) firstPassBTL(files []string) (int, int) {
 			if !match {
 				p(str)
 				values := strings.Fields(str)
-				p("BOTL", map_var["BOTL"])
-				p(values[map_var["BOTL"]])
-				if bottle, err = strconv.ParseFloat(values[map_var["BOTL"]], 64); err != nil {
+				p("BOTL", m.Map_var["BOTL"])
+				p(values[m.Map_var["BOTL"]])
+				if bottle, err = strconv.ParseFloat(values[m.Map_var["BOTL"]], 64); err != nil {
 					log.Fatal(err)
 				}
 				fmt.Fprintln(debug, values)
@@ -86,7 +88,7 @@ func (nc *Nc) firstPassBTL(files []string) (int, int) {
 }
 
 // read .cnv files and extract data
-func (nc *Nc) secondPassBTL(files []string) {
+func secondPassBTL(nc *lib.Nc,m *config.Map,files []string) {
 
 	regIsHeader := regexp.MustCompile(cfg.Seabird.Header)
 	
@@ -104,13 +106,13 @@ func (nc *Nc) secondPassBTL(files []string) {
 		defer fid.Close()
 		// fmt.Printf("Read %s\n", file)
 
-		profile := nc.GetProfileNumber(file)
+		profile := GetProfileNumber(nc,file)
 		scanner := bufio.NewScanner(fid)
 		for scanner.Scan() {
 			str := scanner.Text()
 			match := regIsHeader.MatchString(str)
 			if match {
-				nc.DecodeHeaderSeabird(str, profile)
+				DecodeHeaderSeabird(nc,str, profile)
 			} else {
 				match = regIsMontDayYear.MatchString(str)
 				if match {

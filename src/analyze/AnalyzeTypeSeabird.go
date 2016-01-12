@@ -1,16 +1,17 @@
 //AnalyzeTypeSeabird.go
 //Analyze the type of instrument of the data files
-package main
+package analyze
 
 import (
 	"bufio"
 	"log"
 	"os"
 	"regexp"
+	"toml"
 )
 
 // read all cnv files and return dimensions
-func AnalyzeTypeSeabird(files []string) string {
+func AnalyzeTypeSeabird(cfg toml.Configtoml,files []string) string {
 
 	var result = "error in analyse type"
 	

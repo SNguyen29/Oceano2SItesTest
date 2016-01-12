@@ -3,71 +3,61 @@ package main
 
 import (
 	"fmt"
-	"io"
-	"io/ioutil"
 	"log"
 	//"os"
+	"lib"
+	"config"
+	"toml"
+	"io"
+	"io/ioutil"
+	"analyze"
 	
 ) 
 
-type Data_2D struct {
-	data [][]float64
-}
-
-type AllData_2D map[string]Data_2D
-
-type Nc struct {
-	Dimensions   map[string]int
-	Variables_1D map[string]interface{}
-	Variables_2D AllData_2D
-	Attributes   map[string]string
-	Extras_f     map[string]float64 // used to store max of profiles value
-	Extras_s     map[string]string  // used to store max of profiles type
-	Roscop       map[string]RoscopAttribute
-}
-
 // file prefix for --all option: "-all" for all parameters, "" empty by default
 var prefixAll = ""
+
+// use for debug mode
+var debug io.Writer = ioutil.Discard
+// use for echo mode
+var echo io.Writer = ioutil.Discard
 
 // usefull macro
 var p = fmt.Println
 var f = fmt.Printf
 
-// Create an empty map.
-var map_var = map[string]int{}
-var map_format = map[string]string{}
-var data = make(map[string]interface{})
-var hdr []string
-var cfg configtoml
-var filestruct structfile
 
-// use for debug mode
-var debug io.Writer = ioutil.Discard
+var cfg toml.Configtoml
+var filestruct analyze.Structfile
 
-// use for echo mode
-var echo io.Writer = ioutil.Discard
+type AllData_2D lib.AllData_2D
 
-var nc Nc
+var nc lib.Nc
+var m config.Map
+
+var fileconfig string
 
 // main body
 func main() {
 	
-	//init de variable cfg with config file in TOML
-	initToml()
-	
-	fmt.Fprintf(echo, "After Init")
+	//init variable cfg with config file in TOML
+	fileconfig,cfg = toml.InitToml()
+	//init variable m with empty map 
+	m = config.InitMap()
 	
 	var files []string
 	// to change the flags on the default logger
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	
 	files, optCfgfile := GetOptions()
-
-	filestruct = AnalyzeFile(files)
+	
+	//analyse the file to know contructor, instrument and instrument type
+	filestruct = analyze.AnalyzeFile(cfg,files)
 	
 	switch{
-		case filestruct.Constructeur == Seabird :
-			nc.ReadSeabird(files,optCfgfile)
+		
+		case filestruct.Constructeur.Name == "Seabird" :
+			ReadSeabird(&nc,&m,files,optCfgfile)
 		}
 	
 }

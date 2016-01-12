@@ -1,24 +1,25 @@
 //AnalyzeConstructor.go
 //Analyze the constructor of the data files
-package main
+package analyze
 
 import (
 	"bufio"
 	"log"
 	"os"
 	"strings"
+	"toml"
 )
 
 // define constante for constructor type
-type Constructor int
+type Constructor struct{
+		Name	string
+		number	int
+	}
 
-const (
-	Seabird Constructor = 1
-)
 
 
 // read all cnv files and return dimensions
-func AnalyzeConstructor(files []string) Constructor {
+func AnalyzeConstructor(cfg toml.Configtoml,files []string) Constructor {
 
 	var result Constructor
 	// open first file
@@ -34,7 +35,8 @@ func AnalyzeConstructor(files []string) Constructor {
 		
 		switch {
 		case strings.ContainsAny(cfg.Instrument.Seabird,str) : 
-			result = Seabird
+			result.Name = "Seabird"
+			result.number = 1
 		}
 	}
 	return result

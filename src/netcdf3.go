@@ -5,11 +5,13 @@ import (
 	"github.com/fhs/go-netcdf/netcdf"
 	"log"
 	"strings"
+	"lib"
+	"config"
 )
 
 // creates the NetCDF file following nc structure.
 //func WriteNetcdf(any interface{}) error {
-func (nc *Nc) WriteNetcdf(ncType string) {
+func WriteNetcdf(nc *lib.Nc,m *config.Map,ncType string) {
 
 	// build filename
 	filename := fmt.Sprintf("output/OS_%s%s_%s.nc",
@@ -75,7 +77,7 @@ func (nc *Nc) WriteNetcdf(ncType string) {
 	// the iteration order is not specified and is not guaranteed to be
 	// the same from one iteration to the next in golang
 	// for key, _ := range nc.Variables_2D {
-	for _, key := range hdr {
+	for _, key := range m.Hdr {
 		// remove PRFL from the key list
 		if key == "PRFL" {
 			continue
@@ -113,22 +115,22 @@ func (nc *Nc) WriteNetcdf(ncType string) {
 
 	// write data 2D (value.data) to netcdf variables
 	// for key, value := range nc.Variables_2D {
-	for _, key := range hdr {
+	for _, key := range m.Hdr {
 		// remove PRFL from the key list
 		if key == "PRFL" {
 			continue
 		}
 		value := nc.Variables_2D[key]
 		i := 0
-		ht := len(value.data)
-		wd := len(value.data[0])
+		ht := len(lib.GetData(value))
+		wd := len(lib.GetData(value)[0])
 		fmt.Fprintf(echo, "writing %s: %d x %d\n", key, ht, wd)
 		fmt.Fprintf(debug, "writing %s: %d x %d\n", key, ht, wd)
 		// Write<type> netcdf methods need []<type>, [][]data will be flatten
 		gopher := make([]float64, ht*wd)
 		for x := 0; x < ht; x++ {
 			for y := 0; y < wd; y++ {
-				gopher[i] = value.data[x][y]
+				gopher[i] = lib.GetData(value)[x][y]
 				i++
 			}
 		}

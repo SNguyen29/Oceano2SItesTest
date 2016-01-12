@@ -1,5 +1,5 @@
 // roscop.go
-package main
+package roscop
 
 import (
 	"encoding/csv"
@@ -19,9 +19,10 @@ type RoscopAttribute struct {
 	_FillValue float64
 }
 
+
 // documentation for csv is at http://golang.org/pkg/encoding/csv/
 // TODO: could not find
-func codeRoscopFromCsv(filename string) map[string]RoscopAttribute {
+func CodeRoscopFromCsv(filename string) map[string]RoscopAttribute {
 
 	var roscop = make(map[string]RoscopAttribute)
 
@@ -73,4 +74,10 @@ func codeRoscopFromCsv(filename string) map[string]RoscopAttribute {
 
 	}
 	return roscop
+}
+
+//function to get format of a struct RoscopAttribute
+func GetRoscopformat(ro RoscopAttribute) string {
+	
+	return ro.format
 }

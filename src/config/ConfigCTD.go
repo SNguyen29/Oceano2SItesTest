@@ -1,7 +1,7 @@
 //ConfigBTL.go
 //File for config a instrument CTD
 
-package main
+package config
 
 import (
 	//"code.google.com/p/gcfg"
@@ -9,6 +9,10 @@ import (
 	//"log"
 	"strconv"
 	//"strings"
+	"roscop"
+	"lib"
+	"toml"
+
 )
 
 type ctd struct {
@@ -24,7 +28,7 @@ type ctd struct {
 	
 }
 
-func (nc *Nc) GetConfigCTD(configFile string,Type string) {
+func GetConfigCTD(nc *lib.Nc,m *Map,cfg toml.Configtoml,configFile string,Type string,optAll *bool) {
 
 	//	var split, header, format string
 	var split, splitAll []string
@@ -44,7 +48,7 @@ func (nc *Nc) GetConfigCTD(configFile string,Type string) {
 	nc.Variables_1D["BATH"] = []float64{}
 	nc.Variables_1D["TYPECAST"] = []float64{}
 	nc.Variables_1D["TYPECAST"] = append(nc.Variables_1D["TYPECAST"].([]float64), -1)
-	nc.Roscop = codeRoscopFromCsv(cfg.Roscopfile)
+	nc.Roscop = roscop.CodeRoscopFromCsv(cfg.Roscopfile)
 
 	// add some global attributes for profile, change in future
 	nc.Attributes["data_type"] = Type
@@ -70,7 +74,7 @@ func (nc *Nc) GetConfigCTD(configFile string,Type string) {
 	// add specific column(s) to the first header line in ascii file
 	
 		// First column should be PRFL
-		hdr = append(hdr, "PRFL")
+		m.Hdr = append(m.Hdr, "PRFL")
 
 	// fill map_var from split (read in .ini configuration file)
 	// store the position (column) of each physical parameter
@@ -85,15 +89,15 @@ func (nc *Nc) GetConfigCTD(configFile string,Type string) {
 	// construct header slice from split
 	for i := 0; i < len(fields); i += 2 {
 		if v, err := strconv.Atoi(fields[i+1]); err == nil {
-			map_var[fields[i]] = v - 1
-			hdr = append(hdr, fields[i])
+			m.Map_var[fields[i]] = v - 1
+			m.Hdr = append(m.Hdr, fields[i])
 		}
 	}
-	fmt.Fprintln(debug, "getConfig: ", hdr)
+	fmt.Fprintln(debug, "getConfig: ", m.Hdr)
 
 	// fill map_format from code_roscop
-	for _, key := range hdr {
-		map_format[key] = nc.Roscop[key].format
+	for _, key := range m.Hdr {
+		m.Map_format[key] = roscop.GetRoscopformat(nc.Roscop[key])
 	}
 	//return nc
 }

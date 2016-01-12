@@ -1,7 +1,7 @@
 //ConfigSADCP.go
 //File for config a instrument SADCP
 
-package main
+package config
 
 import (
 	//"code.google.com/p/gcfg"
@@ -9,6 +9,7 @@ import (
 	//"log"
 	//"strconv"
 	//"strings"
+	"lib"
 )
 
 type sadcp struct {
@@ -18,6 +19,6 @@ type sadcp struct {
 	
 }
 
-func (nc *Nc) GetConfigSADCP(configFile string,cfg Config,Type string) {
+func GetConfigSADCP(nc *lib.Nc,m *Map,configFile string,cfg Config,Type string) {
 
 }

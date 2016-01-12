@@ -1,7 +1,7 @@
-//ConfigTHERMO.go
-//File for config a instrument THERMO
+//ConfigXBT.go
+//File for config a instrument XBT
 
-package main
+package config
 
 import (
 	//"code.google.com/p/gcfg"
@@ -9,9 +9,10 @@ import (
 	//"log"
 	//"strconv"
 	//"strings"
+	"lib"
 )
 
-type thermo struct {
+type xbt struct {
 
 	CruisePrefix        string
 	StationPrefixLength string
@@ -19,8 +20,9 @@ type thermo struct {
 	InstrumentNumber    string
 	TitleSummary        string
 	
+	
 }
 
-func (nc *Nc) GetConfigTHERMO(configFile string,cfg Config,Type string) {
+func GetConfigXBT(nc *lib.Nc,m *Map,configFile string,cfg Config,Type string) {
 
 }

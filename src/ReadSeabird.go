@@ -3,40 +3,44 @@
 
 package main
 
+import "lib"
+import "config"
+
+
 // read cnv files in two pass, the first to get dimensions
 // second to get data
-func (nc *Nc) ReadSeabird(files []string,optCfgfile string) {
+func ReadSeabird(nc *lib.Nc, m *config.Map,files []string,optCfgfile string) {
 	
 	switch{
 		case filestruct.Instrument == cfg.Instrument.Type[0] :
-
-			nc.GetConfigCTD(optCfgfile,filestruct.TypeInstrument)
+		
+			config.GetConfigCTD(nc,m,cfg,optCfgfile,filestruct.TypeInstrument,optAll)
 			
 			// first pass, return dimensions fron cnv files
-			nc.Dimensions["TIME"], nc.Dimensions["DEPTH"] = nc.firstPassCTD(files)
+			nc.Dimensions["TIME"], nc.Dimensions["DEPTH"] = firstPassCTD(nc,files)
 		
 			// initialize 2D data
-			nc.Variables_2D = make(AllData_2D)
-			for i, _ := range map_var {
+			nc.Variables_2D = make(lib.AllData_2D)
+			for i, _ := range m.Map_var {
 				nc.Variables_2D.NewData_2D(i, nc.Dimensions["TIME"], nc.Dimensions["DEPTH"])
 			}
 		
 			// second pass, read files again, extract data and fill slices
-			nc.secondPassCTD(files)
+			secondPassCTD(nc,files)
 			// write ASCII file
-			nc.WriteAsciiCTD(map_format, hdr,filestruct.Instrument)
+			WriteAsciiCTD(nc,m.Map_format, m.Hdr,filestruct.Instrument)
 		
 			// write netcdf file
 			//if err := nc.WriteNetcdf(); err != nil {
 			//log.Fatal(err)
 			//}
-			nc.WriteNetcdf(filestruct.Instrument)
+			WriteNetcdf(nc,m,filestruct.Instrument)
 			
 		case filestruct.Instrument == cfg.Instrument.Type[1] :
 		
-			nc.GetConfigBTL(optCfgfile,filestruct.TypeInstrument)
+			config.GetConfigBTL(nc,m,cfg,optCfgfile,filestruct.TypeInstrument)
 			// first pass, return dimensions fron btl files
-			nc.Dimensions["TIME"], nc.Dimensions["DEPTH"] = nc.firstPassBTL(files)
+			nc.Dimensions["TIME"], nc.Dimensions["DEPTH"] = firstPassBTL(nc,m,files)
 		
 			//	// initialize 2D data
 			//	nc.Variables_2D = make(AllData_2D)
@@ -45,14 +49,14 @@ func (nc *Nc) ReadSeabird(files []string,optCfgfile string) {
 			//	}
 		
 			// second pass, read files again, extract data and fill slices
-			nc.secondPassBTL(files)
+			secondPassBTL(nc,m,files)
 			// write ASCII file
-			nc.WriteAsciiBTL2(map_format, hdr,filestruct.Instrument)
+			WriteAsciiBTL2(nc,m.Map_format, m.Hdr,filestruct.Instrument)
 		
 			// write netcdf file
 			//if err := nc.WriteNetcdf(); err != nil {
 			//log.Fatal(err)
 			//}
-			nc.WriteNetcdf(filestruct.Instrument)
+			WriteNetcdf(nc,m,filestruct.Instrument)
 			}
 }
